@@ -12,4 +12,5 @@ namespace strlib {
         double diff = static_cast<double>(note - 69); // Difference of the note from A4
         return 440 * std::pow(2,(diff / 12));
     }
+
 }
