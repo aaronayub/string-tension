@@ -1,4 +1,5 @@
 #pragma once
+#include "stringtype.h"
 
 namespace strlib {
     struct StringWeight {
@@ -6,7 +7,7 @@ namespace strlib {
         double unitWeight;
     };
 
-    double getUnitWeight(int gauge);
+    double getUnitWeight(int gauge, StringType type);
 }
 
 namespace {

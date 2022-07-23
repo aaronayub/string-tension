@@ -3,6 +3,6 @@
 
 namespace strlib {
     enum StringType {
-        PL, NW, XLBP, XLB
+        PL, NW, XLB
     };
 }
