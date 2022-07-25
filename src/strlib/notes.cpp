@@ -10,7 +10,7 @@ namespace strlib {
     }
 
     /* Const array for all notes in 12 tone equal temperament */
-    const std::string NOTES[12] {
+    const std::string NOTELIST[12] {
         "C",
         "C#/Db",
         "D",
