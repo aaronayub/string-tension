@@ -1,7 +1,7 @@
 /* Testing for functions for getUnitWeight on strlib */
 
 #include <gtest/gtest.h>
-#include "../src/strlib/strlib.h"
+#include "../src/strlib/stringweight.h"
 
 TEST(strlibTest, getUnitWeightTest) {
     // Test negative or 0 value inputs

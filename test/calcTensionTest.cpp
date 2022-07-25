@@ -1,7 +1,9 @@
 /* Test to calculate the tension of a string */
 
 #include <gtest/gtest.h>
-#include "../src/strlib/strlib.h"
+#include "../src/strlib/calcTension.h"
+#include "../src/strlib/notes.h"
+#include "../src/strlib/stringweight.h"
 
 /* Regression test to check if anything changes with final tension calculations. */
 TEST(strlibTest,calcTensionTest) {

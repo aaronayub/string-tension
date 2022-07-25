@@ -1,7 +1,7 @@
 /* The following unit weight measurements are adapted from material made available by D'addario.
 Strings from other brands, materials, or construction processes may have differing unit weights. */
 
-#include<vector>
+#include <vector>
 #include "stringweight.h"
 
 namespace strlib {

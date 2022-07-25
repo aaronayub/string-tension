@@ -1,7 +1,7 @@
 /* Tests conversion of notes from name to MIDI, and MIDI to frequency.*/
 
 #include <gtest/gtest.h>
-#include "../src/strlib/strlib.h"
+#include "../src/strlib/notes.h"
 
 TEST(strlibTest, noteToFrequencyTest) {
     EXPECT_DOUBLE_EQ(strlib::noteToFrequency(69),440); // Concert Pitch
