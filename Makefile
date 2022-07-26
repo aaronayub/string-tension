@@ -8,6 +8,7 @@ strlib.a: build
 	${CXX} -c ${STRLIB}/stringlists.cpp -o ${BUILD}/strlib/stringlists.o
 	${CXX} -c ${STRLIB}/calcTension.cpp -o ${BUILD}/strlib/calcTension.o
 	${CXX} -c ${STRLIB}/notes.cpp -o ${BUILD}/strlib/notes.o
+	${CXX} -c ${STRLIB}/string.cpp -o ${BUILD}/strlib/string.o
 	ar rcs ${BUILD}/strlib.a ${BUILD}/strlib/*.o
 
 build:
