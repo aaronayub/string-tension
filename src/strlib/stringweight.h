@@ -8,7 +8,7 @@ namespace strlib {
     };
 
     double getUnitWeight(int gauge, StringType type);
-    double estimateWeight(int gauge, StringWeight low, StringWeight high);
+    double estimateWeight(int gauge, const StringWeight& low, const StringWeight& high);
 }
 
 namespace {

@@ -48,7 +48,7 @@ namespace strlib {
     /* Extrapolates or interpolates unit weights from two gauges in a given string set
     "low" is the smaller gauge from the string set to extrapolate, and "high" is the larger gauge
     "gauge" is the gauge which will have it's unit weight estimated*/
-    double estimateWeight(int gauge, StringWeight low, StringWeight high) {
+    double estimateWeight(int gauge, const StringWeight& low, const StringWeight& high) {
         // Calculate the ratio of gauge/unit weight between the two reference strings.
         int refGaugeDifference = high.gauge - low.gauge;
         double refWeightDifference = high.unitWeight - low.unitWeight;
