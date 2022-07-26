@@ -5,32 +5,34 @@
 namespace strlib {
     class String {
     public:
-        String(double length, double gauge, strlib::StringType type, int note, int octave);
+        String(double length, int gauge, strlib::StringType type, int note, int octave);
 
-        double getLength();
+        String(const String& string, bool higher);
+
+        double getLength() const;
         void setLength(double length);
 
-        double getGauge();
-        void setGauge(double gauge);
+        int getGauge() const;
+        void setGauge(int gauge);
 
-        double getType();
+        strlib::StringType getType() const;
         void setType(strlib::StringType type);
 
-        double getNote();
+        double getNote() const;
         void setNote(int note);
 
-        double getOctave();
+        double getOctave() const;
         void setOctave(int octave);
 
-        double getFrequency();
+        double getFrequency() const;
         
-        double getTension();
+        double getTension() const;
 
         void incrementNote(int amount);
 
     private:
         double length_;
-        double gauge_;
+        int gauge_;
         strlib::StringType type_;
         int note_; // Where 0 is a C note, and 11 is a B. See strlib::NOTES.
         int octave_;
