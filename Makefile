@@ -1,22 +1,24 @@
 CXX:= g++
-BUILD:= ./build
-STRLIB:= ./src/strlib
 TESTFLAGS:= -lgtest -lgtest_main # Flags used to compile the tests
 
-strlib.a: build
-	${CXX} -c ${STRLIB}/stringweight.cpp -o ${BUILD}/strlib/stringweight.o
-	${CXX} -c ${STRLIB}/stringlists.cpp -o ${BUILD}/strlib/stringlists.o
-	${CXX} -c ${STRLIB}/calcTension.cpp -o ${BUILD}/strlib/calcTension.o
-	${CXX} -c ${STRLIB}/notes.cpp -o ${BUILD}/strlib/notes.o
-	${CXX} -c ${STRLIB}/string.cpp -o ${BUILD}/strlib/string.o
-	ar rcs ${BUILD}/strlib.a ${BUILD}/strlib/*.o
+# Pattern match source files to object files
+GUISRC:=${wildcard ./src/*.cpp}
+GUIOBJ:= ${GUISRC:%.cpp=build/%.o}
+STRLIBSRC:=${wildcard ./src/strlib/*.cpp}
+STRLIBOBJ:= ${STRLIBSRC:%.cpp=build/%.o}
 
-build:
-	mkdir ${BUILD}
-	mkdir ${BUILD}/strlib
+# Compiles the gui application
+all: ${GUIOBJ} ${STRLIBOBJ}
+	${CXX} ${GUIOBJ} ${STRLIBOBJ} -o ./build/string-tension
+
+# Individually compile object files in the build directory
+build/%.o: %.cpp
+	mkdir -p ${dir $@}
+	${CXX} -c $< -o $@
+
+# Compiles the testing program
+test: ${STRLIBOBJ}
+	${CXX} ./test/*.cpp ${STRLIBOBJ} -o ./build/test ${TESTFLAGS}
 
 clean:
-	rm -rf ${BUILD}
-
-test: ${BUILD}/strlib.a
-	g++ test/*.cpp ${BUILD}/strlib.a ${TESTFLAGS} -o ${BUILD}/test
+	rm -rf ./build
