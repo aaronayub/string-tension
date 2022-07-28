@@ -2,14 +2,14 @@ CXX:= g++
 TESTFLAGS:= -lgtest -lgtest_main # Flags used to compile the tests
 
 # Pattern match source files to object files
-GUISRC:=${wildcard ./src/*.cpp}
+GUISRC:= ${wildcard ./src/*.cpp}
 GUIOBJ:= ${GUISRC:%.cpp=build/%.o}
-STRLIBSRC:=${wildcard ./src/strlib/*.cpp}
+STRLIBSRC:= ${wildcard ./src/strlib/*.cpp}
 STRLIBOBJ:= ${STRLIBSRC:%.cpp=build/%.o}
 
 # Compiles the gui application
 all: ${GUIOBJ} ${STRLIBOBJ}
-	${CXX} ${GUIOBJ} ${STRLIBOBJ} -o ./build/string-tension
+	${CXX} ${GUIOBJ} ${STRLIBOBJ} -o ./build/string-tension -lfltk
 
 # Individually compile object files in the build directory
 build/%.o: %.cpp
