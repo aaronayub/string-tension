@@ -7,6 +7,7 @@ This project is currently under development.
 
 ### Requirements
 g++
+Fast Light Toolkit (FLTK)
 Googletest (Optional, only required for testing)
 
 ### License
