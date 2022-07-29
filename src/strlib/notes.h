@@ -3,7 +3,22 @@
 
 namespace strlib {
     double noteToFrequency(int note);
-    const std::string NOTELIST[12];
+
+    /* Const array for all notes in 12 tone equal temperament */
+    const std::string NOTELIST[12] {
+        "C",
+        "C#, Db",
+        "D",
+        "D#, Eb",
+        "E",
+        "F",
+        "F#, Gb",
+        "G",
+        "G#, Ab",
+        "A",
+        "A#, Bb",
+        "B"
+    };
 
     /* Enum of notes in 12 tone equal temperament */
     namespace notes {
