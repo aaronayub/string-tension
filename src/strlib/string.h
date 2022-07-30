@@ -21,7 +21,7 @@ namespace strlib {
         double getNote() const;
         void setNote(int note);
 
-        double getOctave() const;
+        int getOctave() const;
         void setOctave(int octave);
 
         double getFrequency() const;

@@ -75,7 +75,7 @@ namespace strlib {
         updateTension();
     }
 
-    double String::getOctave() const { return octave_; }
+    int String::getOctave() const { return octave_; }
     void String::setOctave(int octave) {
         octave_ = octave;
         updateNote();
