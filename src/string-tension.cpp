@@ -14,9 +14,9 @@ int main() {
   Fl::scheme("gtk+");
 
   std::vector<strlib::String> strList = {};
-  strList.push_back(strlib::String(25.5,26,strlib::PL,strlib::notes::E, 4));
-  strList.push_back(strlib::String(25.5,36,strlib::PL,strlib::notes::B, 3));
-  strList.push_back(strlib::String(25.5,46,strlib::PL,strlib::notes::G, 3));
+  strList.push_back(strlib::String(25.5,10,strlib::PL,strlib::notes::E, 4));
+  strList.push_back(strlib::String(25.5,13,strlib::PL,strlib::notes::B, 3));
+  strList.push_back(strlib::String(25.5,17,strlib::PL,strlib::notes::G, 3));
   strList.push_back(strlib::String(25.5,26,strlib::NW,strlib::notes::D, 3));
   strList.push_back(strlib::String(25.5,36,strlib::NW,strlib::notes::A, 2));
   strList.push_back(strlib::String(25.5,46,strlib::NW,strlib::notes::E, 2));
