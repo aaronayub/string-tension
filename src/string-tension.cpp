@@ -23,7 +23,8 @@ int main() {
   
   std::vector<StringDisplay> displays = {};
   for (int i = 0; i < strList.size(); i++) {
-    displays.push_back(StringDisplay(strList[i],i));
+    StringDisplay* d = new StringDisplay(strList[i],i);
+    displays.push_back(*d);
   }
 
   window->end();

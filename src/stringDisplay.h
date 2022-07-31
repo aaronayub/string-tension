@@ -9,23 +9,32 @@ as well as how it is displayed in the GUI. */
 #include <string>
 
 #include "./strlib/string.h"
+#include "./strlib/stringtype.h"
+#include "./strlib/notes.h"
 
 class StringDisplay {
   public:
     StringDisplay(strlib::String& string, int position);
     void remove();
     void reposition(int position);
+    
+    strlib::String* getStringPtr();
+    void updateFrequency();
+    void updateTension();
 
   private:
-    Fl_Pack *pack;
-    Fl_Input *length;
-    Fl_Input *gauge;
-    Fl_Input *octave;
-    Fl_Choice *note;
-    Fl_Choice *type;
-    Fl_Output *frequency;
-    Fl_Output *tension;
+    Fl_Pack *pack_;
+    Fl_Input *length_;
+    Fl_Input *gauge_;
+    Fl_Input *octave_;
+    Fl_Choice *note_;
+    Fl_Choice *type_;
+    Fl_Output *frequency_;
+    Fl_Output *tension_;
+
     strlib::String string_;
+    static void type_cb(Fl_Widget* w, void* v);
+
 };
 
-std::string dtoaNoZeroes(double number);
+static std::string dtoaNoZeroes(double number);
