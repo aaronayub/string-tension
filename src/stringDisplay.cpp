@@ -11,9 +11,7 @@
 
 #include "./stringDisplay.h"
 
-#include <iostream>
-
-StringDisplay::StringDisplay(strlib::String& string, int position): string_(string) {
+StringDisplay::StringDisplay(strlib::String* string, int position): string_(string) {
   /* Initialize the pack which holds all widgets */
   pack_ = new Fl_Pack(40, 20 + position * (60 + 10), 100, 60);
   pack_->type(Fl_Pack::HORIZONTAL);
@@ -51,18 +49,19 @@ StringDisplay::StringDisplay(strlib::String& string, int position): string_(stri
   frequency_->textsize(18);
 
   /* Updates all the widgets to display values from the string */
-  length_->value(dtoaNoZeroes(string_.getLength()).c_str());
-  gauge_->value(std::to_string(string_.getGauge()).c_str());
-  type_->value(string_.getType());
-  note_->value(string_.getNote());
-  octave_->value(std::to_string(string_.getOctave()).c_str());
-  frequency_->value(dtoaNoZeroes(string_.getFrequency()).c_str());
-  tension_->value(dtoaNoZeroes(string_.getTension()).c_str());
+  length_->value(dtoaNoZeroes(string_->getLength()).c_str());
+  gauge_->value(std::to_string(string_->getGauge()).c_str());
+  type_->value(string_->getType());
+  note_->value(string_->getNote());
+  octave_->value(std::to_string(string_->getOctave()).c_str());
+  frequency_->value(dtoaNoZeroes(string_->getFrequency()).c_str());
+  tension_->value(dtoaNoZeroes(string_->getTension()).c_str());
 }
 
 /* Memory-safe deletion of the widget */
 void StringDisplay::remove() {
   Fl::delete_widget(pack_);
+  delete(string_);
 }
 
 /* Repositioning / re-ordering the display for when a new string is added or deleted. */
@@ -81,14 +80,14 @@ void StringDisplay::type_cb(Fl_Widget* w, void* v) {
 }
 
 void StringDisplay::updateFrequency() {
-  frequency_->value(dtoaNoZeroes(string_.getFrequency()).c_str());
+  frequency_->value(dtoaNoZeroes(string_->getFrequency()).c_str());
 }
 void StringDisplay::updateTension() {
-  tension_->value(dtoaNoZeroes(string_.getTension()).c_str());
+  tension_->value(dtoaNoZeroes(string_->getTension()).c_str());
 }
 
 strlib::String* StringDisplay::getStringPtr() {
-  return &string_;
+  return string_;
 }
 
 /* Convert double to string, removing trailing 0's, and the decimal point if it's an integer. */

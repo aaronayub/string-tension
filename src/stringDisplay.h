@@ -14,7 +14,7 @@ as well as how it is displayed in the GUI. */
 
 class StringDisplay {
   public:
-    StringDisplay(strlib::String& string, int position);
+    StringDisplay(strlib::String* string, int position);
     void remove();
     void reposition(int position);
     
@@ -32,7 +32,7 @@ class StringDisplay {
     Fl_Output *frequency_;
     Fl_Output *tension_;
 
-    strlib::String string_;
+    strlib::String* string_;
     static void type_cb(Fl_Widget* w, void* v);
 
 };
