@@ -34,7 +34,14 @@ class StringDisplay {
 
     strlib::String* string_;
     static void type_cb(Fl_Widget* w, void* v);
+    static void note_cb(Fl_Widget* w, void* v);
+    static void length_cb(Fl_Widget* w, void* v);
+    static void gauge_cb(Fl_Widget* w, void* v);
+    static void octave_cb(Fl_Widget* w, void* v);
 
 };
 
 static std::string dtoaNoZeroes(double number);
+
+template <typename T>
+static T atoPosNum (const char * a);

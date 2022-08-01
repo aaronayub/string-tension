@@ -10,6 +10,8 @@
 #include "./strlib/notes.h"
 
 #include "./stringDisplay.h"
+#include <iostream>
+#include <charconv>
 
 StringDisplay::StringDisplay(strlib::String* string, int position): string_(string) {
   /* Initialize the pack which holds all widgets */
@@ -33,11 +35,20 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   type_->add("NW");
   type_->add("XLB");
 
-  type_->callback(type_cb, this);
-
   for (std::string noteName : strlib::NOTELIST) {
     note_->add(noteName.c_str());
   }
+
+  /* Add callbacks to widgets*/
+  type_->callback(type_cb, this);
+  note_->callback(note_cb, this);
+  length_->callback(length_cb, this);
+  gauge_->callback(gauge_cb, this);
+  octave_->callback(octave_cb, this);
+
+  length_->when(FL_WHEN_CHANGED);
+  gauge_->when(FL_WHEN_CHANGED);
+  octave_->when(FL_WHEN_CHANGED);
 
   /* Increase the font size of all widgets*/
   length_   ->textsize(18);
@@ -69,12 +80,55 @@ void StringDisplay::reposition(int position) {
   pack_->position(40,20 + (position + 1) * (60 + 10));
 }
 
-/* Callback for when a user changes string type*/
+/* Callback for when a user changes string type */
 void StringDisplay::type_cb(Fl_Widget* w, void* v) {
   Fl_Choice* choice {static_cast<Fl_Choice*>(w)};
   StringDisplay* display {static_cast<StringDisplay*>(v)};
   strlib::String* strptr = display->getStringPtr();
   strptr->setType(static_cast<strlib::StringType>(choice->value()));
+  display->updateTension();
+}
+
+/* Callback for when a user changes string note */
+void StringDisplay::note_cb(Fl_Widget* w, void* v) {
+  Fl_Choice* choice {static_cast<Fl_Choice*>(w)};
+  StringDisplay* display {static_cast<StringDisplay*>(v)};
+  strlib::String* strptr = display->getStringPtr();
+  strptr->setNote(static_cast<strlib::notes::Notename>(choice->value()));
+  display->updateFrequency();
+  display->updateTension();
+}
+
+/* Callback for when a user changes string length */
+void StringDisplay::length_cb(Fl_Widget* w, void* v) {
+  Fl_Input* input {static_cast<Fl_Input*>(w)};
+  StringDisplay* display {static_cast<StringDisplay*>(v)};
+  strlib::String* strptr = display->getStringPtr();
+
+  double length = atoPosNum<double>(input->value());
+  strptr->setLength(length);
+  display->updateTension();
+}
+
+/* Callback for when a user changes string gauge */
+void StringDisplay::gauge_cb(Fl_Widget* w, void* v) {
+  Fl_Input* input {static_cast<Fl_Input*>(w)};
+  StringDisplay* display {static_cast<StringDisplay*>(v)};
+  strlib::String* strptr = display->getStringPtr();
+
+  int gauge = atoPosNum<int>(input->value());
+  strptr->setGauge(gauge);
+  display->updateTension();
+}
+
+/* Callback for when a user changes string octave */
+void StringDisplay::octave_cb(Fl_Widget* w, void* v) {
+  Fl_Input* input {static_cast<Fl_Input*>(w)};
+  StringDisplay* display {static_cast<StringDisplay*>(v)};
+  strlib::String* strptr = display->getStringPtr();
+
+  int octave = atoPosNum<int>(input->value());
+  strptr->setOctave(octave);
   display->updateFrequency();
   display->updateTension();
 }
@@ -98,4 +152,17 @@ static std::string dtoaNoZeroes(double number) {
     str.pop_back();
   }
   return str;
+}
+
+/* Converts a c-style string to a positive number  */
+template <typename T>
+static T atoPosNum (const char * a) {
+  std::string str = a;
+  T out;
+  auto [_, err] = std::from_chars(str.data(), str.data() + str.size(), out);
+  if (err == std::errc::invalid_argument) { // Avoid undefined behaviour blank inputs
+    return 0;
+  }
+  if (out < 0) out*=-1; // Do not allow negative numbers
+  return out;
 }
