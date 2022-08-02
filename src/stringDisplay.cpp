@@ -10,12 +10,11 @@
 #include "./strlib/notes.h"
 
 #include "./stringDisplay.h"
-#include <iostream>
 #include <charconv>
 
 StringDisplay::StringDisplay(strlib::String* string, int position): string_(string) {
   /* Initialize the pack which holds all widgets */
-  pack_ = new Fl_Pack(40, 20 + position * (60 + 10), 100, 60);
+  pack_ = new Fl_Pack(40, 100 + position * (40 + 10), 100, 40);
   pack_->type(Fl_Pack::HORIZONTAL);
   pack_->spacing(10);
 
@@ -69,6 +68,11 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   tension_->value(dtoaNoZeroes(string_->getTension()).c_str());
 }
 
+/* Returns a pointer to the pack*/
+Fl_Pack* StringDisplay::getPackPtr() {
+  return pack_;
+}
+
 /* Memory-safe deletion of the widget */
 void StringDisplay::remove() {
   Fl::delete_widget(pack_);
@@ -77,7 +81,7 @@ void StringDisplay::remove() {
 
 /* Repositioning / re-ordering the display for when a new string is added or deleted. */
 void StringDisplay::reposition(int position) {
-  pack_->position(40,20 + (position + 1) * (60 + 10));
+  pack_->position(40,100 + (position + 1) * (40 + 10));
 }
 
 /* Callback for when a user changes string type */

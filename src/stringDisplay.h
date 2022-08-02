@@ -1,5 +1,6 @@
 /* A StringDisplay holds information about a string in the calculator,
 as well as how it is displayed in the GUI. */
+#pragma once
 
 #include <FL/Fl.H>
 #include <FL/Fl_Input.H>
@@ -19,6 +20,7 @@ class StringDisplay {
     void reposition(int position);
     
     strlib::String* getStringPtr();
+    Fl_Pack* getPackPtr();
     void updateFrequency();
     void updateTension();
 
