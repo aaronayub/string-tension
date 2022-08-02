@@ -1,6 +1,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
+#include <FL/Fl_Box.H>
 #include <deque>
 
 #include "./strlib/string.h"
@@ -54,8 +55,7 @@ void addDown_cb(Fl_Widget* w, void* v) {
 }
 
 int main() {
-  window = new Fl_Window(900,600, "String Tension Calculator");
-  window->resizable(window);
+  window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
   
 
@@ -72,12 +72,20 @@ int main() {
     StringDisplay* d = new StringDisplay(strList[i],i);
     displays.push_back(d);
   }
-
-  Fl_Button* addUp = new Fl_Button(40,20,160,40,"Add higher string");
-  Fl_Button* addDown = new Fl_Button(240,20,160,40,"Add lower string");
+  
+  Fl_Pack* controls = new Fl_Pack(40,20,100,40);
+  controls->type(Fl_Pack::HORIZONTAL);
+  controls->spacing(10);
+  controls->begin();
+  Fl_Button* addUp = new Fl_Button(0,0,160,0,"Add higher string");
+  Fl_Button* addDown = new Fl_Button(0,0,160,0,"Add lower string");
+  controls->end();
   addUp->callback(addUp_cb,&displays);
   addDown->callback(addDown_cb,&displays);
 
+  Fl_Box* resizeBox = new Fl_Box(9999,9999,5,5);
+  resizeBox->hide();
+  window->resizable(resizeBox);
   window->end();
   window->show();
   return Fl::run();
