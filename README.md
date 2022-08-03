@@ -1,9 +1,8 @@
 # string-tension
 A program to calculate the tensions of guitar or bass strings.
 
-This project is currently under development.
-
 ### Usage
+To build this project, run `make` in the top-level directory. This will create an executable named "string-tension". Run the executable, and modify any of the string parameters to re-calculate tension.
 
 ### Requirements
 g++

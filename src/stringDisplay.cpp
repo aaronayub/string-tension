@@ -26,10 +26,10 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   /* Add all widgets as part of the pack*/
   pack_->begin();
   length_   = new Fl_Input(0,0,100,60,0);
-  gauge_    = new Fl_Input(0,0,60,60,0);
+  gauge_    = new Fl_Input(0,0,80,60,0);
   type_     = new Fl_Choice(0,0,80,60,0);
   note_     = new Fl_Choice(0,0,100,60,0);
-  octave_   = new Fl_Input(0,0,100,60,0);
+  octave_   = new Fl_Input(0,0,60,60,0);
   tension_  = new Fl_Output(0,0,100,60,0);
   frequency_= new Fl_Output(0,0,100,60,0);
   pack_->end();
@@ -42,6 +42,10 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   for (std::string noteName : strlib::NOTELIST) {
     note_->add(noteName.c_str());
   }
+
+  /* Extra formatting for outputs*/
+  tension_->set_output();
+  frequency_->set_output();
 
   /* Add callbacks to widgets*/
   type_->callback(type_cb, this);
@@ -69,8 +73,8 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   type_->value(string_->getType());
   note_->value(string_->getNote());
   octave_->value(std::to_string(string_->getOctave()).c_str());
-  frequency_->value(dtoaNoZeroes(string_->getFrequency()).c_str());
-  tension_->value(dtoaNoZeroes(string_->getTension()).c_str());
+  updateTension();
+  updateFrequency();
 }
 
 /* Returns a pointer to the pack*/
@@ -143,10 +147,10 @@ void StringDisplay::octave_cb(Fl_Widget* w, void* v) {
 }
 
 void StringDisplay::updateFrequency() {
-  frequency_->value(dtoaNoZeroes(string_->getFrequency()).c_str());
+  frequency_->value(dtoaNoZeroes(string_->getFrequency()).substr(0,7).c_str());
 }
 void StringDisplay::updateTension() {
-  tension_->value(dtoaNoZeroes(string_->getTension()).c_str());
+  tension_->value(dtoaNoZeroes(string_->getTension()).substr(0,7).c_str());
 }
 
 strlib::String* StringDisplay::getStringPtr() {

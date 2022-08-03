@@ -2,6 +2,7 @@
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Text_Display.H>
 #include <deque>
 
 #include "./strlib/string.h"
@@ -57,7 +58,6 @@ void addDown_cb(Fl_Widget* w, void* v) {
 int main() {
   window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
-  
 
   std::deque<strlib::String*> strList = {};
   strList.push_back(new strlib::String(25.5,10,strlib::PL,strlib::notes::E, 4));
@@ -80,6 +80,27 @@ int main() {
   Fl_Button* addUp = new Fl_Button(0,0,160,0,"Add higher string");
   Fl_Button* addDown = new Fl_Button(0,0,160,0,"Add lower string");
   controls->end();
+
+  Fl_Pack* labels = new Fl_Pack(40,90,100,40);
+  labels->type(Fl_Pack::HORIZONTAL);
+  labels->spacing(10);
+  labels->begin();
+  Fl_Text_Display* length   = new Fl_Text_Display(0,0,100,40,"Length (in)");
+  Fl_Text_Display* gauge    = new Fl_Text_Display(0,0,80,40,"Gauge");
+  Fl_Text_Display* type     = new Fl_Text_Display(0,0,80,40,"Type");
+  Fl_Text_Display* note     = new Fl_Text_Display(0,0,100,40,"Note");
+  Fl_Text_Display* octave   = new Fl_Text_Display(0,0,60,40,"Octave");
+  Fl_Text_Display* tension  = new Fl_Text_Display(0,0,100,40,"Tension (lbs)");
+  Fl_Text_Display* frequency= new Fl_Text_Display(0,0,100,40,"Frequency (Hz)");
+  
+  length   ->box(FL_NO_BOX);
+  gauge    ->box(FL_NO_BOX);
+  type     ->box(FL_NO_BOX);
+  note     ->box(FL_NO_BOX);
+  octave   ->box(FL_NO_BOX);
+  tension  ->box(FL_NO_BOX);
+  frequency->box(FL_NO_BOX);
+  labels->end();
   addUp->callback(addUp_cb,&displays);
   addDown->callback(addDown_cb,&displays);
 
