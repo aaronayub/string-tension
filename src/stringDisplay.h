@@ -13,19 +13,18 @@ as well as how it is displayed in the GUI. */
 #include "./strlib/stringtype.h"
 #include "./strlib/notes.h"
 
-class StringDisplay {
+class StringDisplay : public Fl_Pack {
   public:
     StringDisplay(strlib::String* string, int position);
+    ~StringDisplay();
     void remove();
     void reposition(int position);
     
     strlib::String* getStringPtr();
-    Fl_Pack* getPackPtr();
     void updateFrequency();
     void updateTension();
 
   private:
-    Fl_Pack *pack_;
     Fl_Input *length_;
     Fl_Input *gauge_;
     Fl_Input *octave_;

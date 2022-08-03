@@ -12,19 +12,18 @@
 #include "./stringDisplay.h"
 #include <charconv>
 
-static constexpr int leftMargin = 40; 
-static constexpr int topMargin = 100;
-static constexpr int spacing = 10;
+static constexpr int itemSpacing = 10;
 static constexpr int packHeight = 40;
+static constexpr int topMargin = 100;
+static constexpr int leftMargin = 40;
 
-StringDisplay::StringDisplay(strlib::String* string, int position): string_(string) {
-  /* Initialize the pack which holds all widgets */
-  pack_ = new Fl_Pack(leftMargin, topMargin + position * (packHeight + spacing), 100, packHeight);
-  pack_->type(Fl_Pack::HORIZONTAL);
-  pack_->spacing(spacing);
+StringDisplay::StringDisplay(strlib::String* string, int position) : Fl_Pack(leftMargin,topMargin + position * (packHeight + itemSpacing), 0, packHeight, 0) {
+  this->type(Fl_Pack::HORIZONTAL);
+  this->spacing(itemSpacing);
 
+  string_ = string;
   /* Add all widgets as part of the pack*/
-  pack_->begin();
+  this->begin();
   length_   = new Fl_Input(0,0,100,60,0);
   gauge_    = new Fl_Input(0,0,80,60,0);
   type_     = new Fl_Choice(0,0,80,60,0);
@@ -32,7 +31,7 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   octave_   = new Fl_Input(0,0,60,60,0);
   tension_  = new Fl_Output(0,0,100,60,0);
   frequency_= new Fl_Output(0,0,100,60,0);
-  pack_->end();
+  this->end();
 
   /* Add selections to the choice widgets*/
   type_->add("PL");
@@ -76,21 +75,17 @@ StringDisplay::StringDisplay(strlib::String* string, int position): string_(stri
   updateTension();
   updateFrequency();
 }
-
-/* Returns a pointer to the pack*/
-Fl_Pack* StringDisplay::getPackPtr() {
-  return pack_;
-}
+StringDisplay::~StringDisplay() {}
 
 /* Memory-safe deletion of the widget */
 void StringDisplay::remove() {
-  Fl::delete_widget(pack_);
   delete(string_);
+  Fl::delete_widget(this);
 }
 
 /* Repositioning / re-ordering the display for when a new string is added or deleted. */
 void StringDisplay::reposition(int position) {
-  pack_->position(leftMargin,topMargin + position * (packHeight + spacing));
+  this->position(leftMargin,topMargin + position * (packHeight + itemSpacing));
 }
 
 /* Callback for when a user changes string type */

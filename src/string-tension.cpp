@@ -18,14 +18,14 @@ void addUp_cb(Fl_Widget* w, void* v) {
   std::deque<StringDisplay*>* list = static_cast<std::deque<StringDisplay*>*>(v);
   if (list->empty()) {
     strlib::String* newStr = new strlib::String(25.5,10,strlib::PL,strlib::notes::E,4);
-    StringDisplay* d = new StringDisplay(newStr,0);
-    window->add(d->getPackPtr());
+    StringDisplay* d = new StringDisplay(newStr, 0);
+    window->add(d);
     list->push_back(d);
   }
   else {
     strlib::String* newStr = new strlib::String(*(list->front()->getStringPtr()),true);
-    StringDisplay* d = new StringDisplay(newStr,0);
-    window->add(d->getPackPtr());
+    StringDisplay* d = new StringDisplay(newStr, 0);
+    window->add(d);
     list->push_front(d);
     for (int i = 0; i < list->size(); i++) {
       list->at(i)->reposition(i);
@@ -39,14 +39,14 @@ void addDown_cb(Fl_Widget* w, void* v) {
   std::deque<StringDisplay*>* list = static_cast<std::deque<StringDisplay*>*>(v);
   if (list->empty()) {
     strlib::String* newStr = new strlib::String(25.5,10,strlib::PL,strlib::notes::E,4);
-    StringDisplay* d = new StringDisplay(newStr,0);
-    window->add(d->getPackPtr());
+    StringDisplay* d = new StringDisplay(newStr, 0);
+    window->add(d);
     list->push_back(d);
   }
   else {
     strlib::String* newStr = new strlib::String(*(list->back()->getStringPtr()),false);
-    StringDisplay* d = new StringDisplay(newStr,list->size());
-    window->add(d->getPackPtr());
+    StringDisplay* d = new StringDisplay(newStr, list->size());
+    window->add(d);
     list->push_back(d);
     for (int i = 0; i < list->size(); i++) {
       list->at(i)->reposition(i);
