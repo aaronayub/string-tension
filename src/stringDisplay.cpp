@@ -75,7 +75,6 @@ StringDisplay::StringDisplay(strlib::String* string, int position) : Fl_Pack(lef
   updateTension();
   updateFrequency();
 }
-StringDisplay::~StringDisplay() {}
 
 /* Memory-safe deletion of the widget */
 void StringDisplay::remove() {

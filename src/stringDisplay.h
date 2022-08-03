@@ -16,7 +16,6 @@ as well as how it is displayed in the GUI. */
 class StringDisplay : public Fl_Pack {
   public:
     StringDisplay(strlib::String* string, int position);
-    ~StringDisplay();
     void remove();
     void reposition(int position);
     
