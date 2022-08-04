@@ -32,7 +32,6 @@ void StringView::addString(bool higher) {
   else {
     StringDisplay* d;
     if (higher) { // Adding a higher string
-    strlib::String* oldStr = list_.front()->getStringPtr();
       strlib::String* newStr = new strlib::String(*(list_.front()->getStringPtr()),true);
       d = new StringDisplay(newStr, 0);
       list_.push_front(d);
