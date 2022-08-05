@@ -1,4 +1,6 @@
 /* An Fl_Scroll holding a list of strings */
+#pragma once
+
 #include <FL/Fl.H>
 #include <FL/Fl_Group.H>
 #include <deque>

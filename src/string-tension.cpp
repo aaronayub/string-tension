@@ -10,6 +10,7 @@
 
 #include "./stringDisplay.h"
 #include "./StringView.h"
+#include "./SetSelector.h"
 
 Fl_Window* window;
 
@@ -29,15 +30,16 @@ int main() {
   window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
   
-  Fl_Pack* controls = new Fl_Pack(40,20,100,40);
+  Fl_Pack* controls = new Fl_Pack(40,30,100,40);
   controls->type(Fl_Pack::HORIZONTAL);
   controls->spacing(10);
   controls->begin();
   Fl_Button* addUp = new Fl_Button(0,0,160,0,"Add higher string");
   Fl_Button* addDown = new Fl_Button(0,0,160,0,"Add lower string");
+  SetSelector* selector = new SetSelector(0,0,160,0);
   controls->end();
 
-  Fl_Pack* labels = new Fl_Pack(40,90,100,40);
+  Fl_Pack* labels = new Fl_Pack(40,100,100,40);
   labels->type(Fl_Pack::HORIZONTAL);
   labels->spacing(10);
   labels->begin();
@@ -58,17 +60,8 @@ int main() {
   frequency->box(FL_NO_BOX);
   labels->end();
 
-
-  std::vector<strlib::String*> strList = {};
-  strList.push_back(new strlib::String(25.5,10,strlib::PL,strlib::notes::E, 4));
-  strList.push_back(new strlib::String(25.5,13,strlib::PL,strlib::notes::B, 3));
-  strList.push_back(new strlib::String(25.5,17,strlib::PL,strlib::notes::G, 3));
-  strList.push_back(new strlib::String(25.5,26,strlib::NW,strlib::notes::D, 3));
-  strList.push_back(new strlib::String(25.5,36,strlib::NW,strlib::notes::A, 2));
-  strList.push_back(new strlib::String(25.5,46,strlib::NW,strlib::notes::E, 2));
-
-  StringView* view = new StringView(40,100,860,800);
-  view->applySet(strList);
+  StringView* view = new StringView(40,110,860,790);
+  selector->init(view);
 
   addUp->callback(addUp_cb,view);
   addDown->callback(addDown_cb,view);
