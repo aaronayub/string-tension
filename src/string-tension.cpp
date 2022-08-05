@@ -12,8 +12,6 @@
 #include "./StringView.h"
 #include "./SetSelector.h"
 
-Fl_Window* window;
-
 // Adds a string to the top of the list.
 void addUp_cb(Fl_Widget* w, void* v) {
   StringView* view = static_cast<StringView*>(v);
@@ -27,7 +25,7 @@ void addDown_cb(Fl_Widget* w, void* v) {
 }
 
 int main() {
-  window = new Fl_Window(900,900, "String Tension Calculator");
+  Fl_Window* window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
   
   Fl_Pack* controls = new Fl_Pack(40,30,100,40);
