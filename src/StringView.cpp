@@ -20,6 +20,13 @@ void StringView::applySet(std::vector<strlib::String*>& set) {
     }
 }
 
+// Changes the note of all strings by a specified amount
+void StringView::incrementAll(int increment) {
+  for (StringDisplay* d : list_) {
+    d->incrementNote(increment);
+  }
+}
+
 // Adds a string to the top or bottom of the view
 void StringView::addString(bool higher) {
   // Create a string by default if the list is empty

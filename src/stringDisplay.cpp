@@ -14,7 +14,7 @@
 
 static constexpr int itemSpacing = 10;
 static constexpr int packHeight = 40;
-static constexpr int topMargin = 100;
+static constexpr int topMargin = 150;
 static constexpr int leftMargin = 40;
 
 StringDisplay::StringDisplay(strlib::String* string, int position) : Fl_Pack(leftMargin,topMargin + position * (packHeight + itemSpacing), 0, packHeight, 0) {
@@ -27,7 +27,7 @@ StringDisplay::StringDisplay(strlib::String* string, int position) : Fl_Pack(lef
   length_   = new Fl_Input(0,0,100,60,0);
   gauge_    = new Fl_Input(0,0,80,60,0);
   type_     = new Fl_Choice(0,0,80,60,0);
-  note_     = new Fl_Choice(0,0,100,60,0);
+  note_     = new Fl_Choice(0,0,90,60,0);
   octave_   = new Fl_Input(0,0,60,60,0);
   tension_  = new Fl_Output(0,0,100,60,0);
   frequency_= new Fl_Output(0,0,100,60,0);
@@ -138,6 +138,15 @@ void StringDisplay::octave_cb(Fl_Widget* w, void* v) {
   strptr->setOctave(octave);
   display->updateFrequency();
   display->updateTension();
+}
+
+// Update the note of the string by a specified amount
+void StringDisplay::incrementNote(int increment) {
+  string_->incrementNote(increment);
+  note_->value(string_->getNote());
+  octave_->value(std::to_string(string_->getOctave()).c_str());
+  updateFrequency();
+  updateTension();
 }
 
 void StringDisplay::updateFrequency() {

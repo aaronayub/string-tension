@@ -22,6 +22,7 @@ class StringDisplay : public Fl_Pack {
     strlib::String* getStringPtr();
     void updateFrequency();
     void updateTension();
+    void incrementNote(int increment);
 
   private:
     Fl_Input *length_;
