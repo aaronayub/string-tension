@@ -149,6 +149,13 @@ void StringDisplay::incrementNote(int increment) {
   updateTension();
 }
 
+// Sets the string length, and updates widgets.
+void StringDisplay::setLength(double length) {
+  string_->setLength(length);
+  length_->value(dtoaNoZeroes(string_->getLength()).c_str());
+  updateTension();
+}
+
 void StringDisplay::updateFrequency() {
   frequency_->value(dtoaNoZeroes(string_->getFrequency()).substr(0,7).c_str());
 }

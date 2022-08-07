@@ -8,6 +8,7 @@ StringView::StringView(int x, int y, int w, int h, const char *label) : Fl_Group
     list_ = {};
 }
 
+// Replaces the current set of strings with a new one
 void StringView::applySet(std::vector<strlib::String*>& set) {
     for (StringDisplay* d : list_) {
         d->remove();
@@ -24,6 +25,19 @@ void StringView::applySet(std::vector<strlib::String*>& set) {
 void StringView::incrementAll(int increment) {
   for (StringDisplay* d : list_) {
     d->incrementNote(increment);
+  }
+}
+
+// Updates the scale length of all strings.
+void StringView::setLengths(double min, double max) {
+  // The maximum scale length cannot be lower than the minimum
+  if (max < min) {
+    max = min;
+  };
+
+  for (int i = 0; i < list_.size(); i++) {
+    double length = min + (max - min) * ((double)i / (list_.size() - 1));
+    list_.at(i)->setLength(length);
   }
 }
 

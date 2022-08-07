@@ -23,6 +23,7 @@ class StringDisplay : public Fl_Pack {
     void updateFrequency();
     void updateTension();
     void incrementNote(int increment);
+    void setLength(double length);
 
   private:
     Fl_Input *length_;

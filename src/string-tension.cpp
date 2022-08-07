@@ -2,6 +2,7 @@
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Text_Display.H>
+#include <FL/Fl_Value_Input.H>
 #include <vector>
 
 #include "./strlib/string.h"
@@ -11,6 +12,7 @@
 #include "./stringDisplay.h"
 #include "./StringView.h"
 #include "./SetSelector.h"
+#include "./string-tension.h"
 
 // Adds a string to the top of the list.
 void addUp_cb(Fl_Widget* w, void* v) {
@@ -36,6 +38,13 @@ void notesDown_cb(Fl_Widget* w, void* v) {
   view->incrementAll(-1);
 }
 
+// Sets the scale length of all strings
+void setScale_cb(Fl_Widget* w, void* v) {
+  ScaleLengthSet* set = static_cast<ScaleLengthSet*>(v);
+  double min = set->min->value();
+  double max = set->max->value();
+  set->sv->setLengths(min,max);
+}
 
 int main() {
   Fl_Window* window = new Fl_Window(900,900, "String Tension Calculator");
@@ -45,9 +54,14 @@ int main() {
   controls->type(Fl_Pack::HORIZONTAL);
   controls->spacing(10);
   controls->begin();
-  Fl_Button* addUp = new Fl_Button(0,0,140,0,"Add higher string");
-  Fl_Button* addDown = new Fl_Button(0,0,140,0,"Add lower string");
   SetSelector* selector = new SetSelector(0,0,160,0);
+  Fl_Value_Input* scaleMin = new Fl_Value_Input(0,0,100,0,"Min Length");
+  Fl_Value_Input* scaleMax = new Fl_Value_Input(0,0,100,0,"Max Length");
+  scaleMin->align(FL_ALIGN_TOP);
+  scaleMax->align(FL_ALIGN_TOP);
+  scaleMin->textsize(18);
+  scaleMax->textsize(18);
+  Fl_Button* scaleButton = new Fl_Button(0,0,80,0,"Set Scale");
   controls->end();
 
   Fl_Pack* controls2 = new Fl_Pack(40,80,100,40);
@@ -57,6 +71,8 @@ int main() {
   Fl_Output* notesLabel = new Fl_Output(0,0,80,0);
   Fl_Button* notesUp = new Fl_Button(0,0,30,0,"↑");
   Fl_Button* notesDown = new Fl_Button(0,0,30,0,"↓");
+  Fl_Button* addUp = new Fl_Button(0,0,140,0,"Add higher string");
+  Fl_Button* addDown = new Fl_Button(0,0,140,0,"Add lower string");
   controls2->end();
   notesLabel->box(FL_NO_BOX);
   notesLabel->static_value("Shift Notes: ");
@@ -90,6 +106,10 @@ int main() {
   addDown->callback(addDown_cb,view);
   notesUp->callback(notesUp_cb,view);
   notesDown->callback(notesDown_cb,view);
+
+  ScaleLengthSet scale {scaleMin,scaleMax,view};
+  scaleButton->callback(setScale_cb,&scale);
+
 
   window->resizable(view);
   window->end();

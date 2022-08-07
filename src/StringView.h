@@ -15,6 +15,7 @@ class StringView : public Fl_Group {
         void applySet(std::vector<strlib::String*>& set);
         void addString(bool higher);
         void incrementAll(int increment);
+        void setLengths(double min, double max);
 
     private:
         std::deque<StringDisplay*> list_;
