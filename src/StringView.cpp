@@ -3,6 +3,7 @@
 
 #include "./StringView.h"
 #include "./stringDisplay.h"
+#include "./strlib/notes.h"
 
 StringView::StringView(int x, int y, int w, int h, const char *label) : Fl_Group(x, y, w, h, label) {
     list_ = {};
