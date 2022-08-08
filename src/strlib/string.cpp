@@ -92,6 +92,7 @@ namespace strlib {
         note_ = midiNote_ % 12;
         octave_ = (midiNote_ / 12) - 1;
         frequency_ = strlib::noteToFrequency(midiNote_);
+        updateTension();
     }
 
     // Updates the tension of the string.
