@@ -1,83 +1,17 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Output.H>
 #include <FL/Fl_Text_Display.H>
-#include <FL/Fl_Value_Input.H>
-#include <vector>
 
-#include "./strlib/string.h"
-#include "./strlib/stringtype.h"
-#include "./strlib/notes.h"
-
-#include "./stringDisplay.h"
 #include "./StringView.h"
-#include "./SetSelector.h"
-#include "./string-tension.h"
-
-// Adds a string to the top of the list.
-void addUp_cb(Fl_Widget* w, void* v) {
-  StringView* view = static_cast<StringView*>(v);
-  view->addString(true);
-}
-
-// Adds a string to the bottom of the list.
-void addDown_cb(Fl_Widget* w, void* v) {
-  StringView* view = static_cast<StringView*>(v);
-  view->addString(false);
-}
-
-// Increments all notes up by one semitone
-void notesUp_cb(Fl_Widget* w, void* v) {
-  StringView* view = static_cast<StringView*>(v);
-  view->incrementAll(1);
-}
-
-// Increments all notes down by one semitone
-void notesDown_cb(Fl_Widget* w, void* v) {
-  StringView* view = static_cast<StringView*>(v);
-  view->incrementAll(-1);
-}
-
-// Sets the scale length of all strings
-void setScale_cb(Fl_Widget* w, void* v) {
-  ScaleLengthSet* set = static_cast<ScaleLengthSet*>(v);
-  double min = set->min->value();
-  double max = set->max->value();
-  set->sv->setLengths(min,max);
-}
+#include "./ControlPanel.h"
 
 int main() {
   Fl_Window* window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
-  
-  Fl_Pack* controls = new Fl_Pack(40,30,100,40);
-  controls->type(Fl_Pack::HORIZONTAL);
-  controls->spacing(10);
-  controls->begin();
-  SetSelector* selector = new SetSelector(0,0,160,0);
-  Fl_Value_Input* scaleMin = new Fl_Value_Input(0,0,100,0,"Min Length");
-  Fl_Value_Input* scaleMax = new Fl_Value_Input(0,0,100,0,"Max Length");
-  scaleMin->align(FL_ALIGN_TOP);
-  scaleMax->align(FL_ALIGN_TOP);
-  scaleMin->textsize(18);
-  scaleMax->textsize(18);
-  Fl_Button* scaleButton = new Fl_Button(0,0,80,0,"Set Scale");
-  controls->end();
 
-  Fl_Pack* controls2 = new Fl_Pack(40,80,100,40);
-  controls2->type(Fl_Pack::HORIZONTAL);
-  controls2->spacing(10);
-  controls2->begin();
-  Fl_Output* notesLabel = new Fl_Output(0,0,80,0);
-  Fl_Button* notesUp = new Fl_Button(0,0,30,0,"↑");
-  Fl_Button* notesDown = new Fl_Button(0,0,30,0,"↓");
-  Fl_Button* addUp = new Fl_Button(0,0,140,0,"Add higher string");
-  Fl_Button* addDown = new Fl_Button(0,0,140,0,"Add lower string");
-  controls2->end();
-  notesLabel->box(FL_NO_BOX);
-  notesLabel->static_value("Shift Notes: ");
-  notesLabel->set_output();
+  StringView* view = new StringView(40,150,860,400);
+  ControlPanel* panel = new ControlPanel();
+  panel->init(view);
 
   Fl_Pack* labels = new Fl_Pack(40,150,100,40);
   labels->type(Fl_Pack::HORIZONTAL);
@@ -90,6 +24,7 @@ int main() {
   Fl_Text_Display* octave   = new Fl_Text_Display(0,0,60,40,"Octave");
   Fl_Text_Display* tension  = new Fl_Text_Display(0,0,100,40,"Tension (lbs)");
   Fl_Text_Display* frequency= new Fl_Text_Display(0,0,100,40,"Frequency (Hz)");
+  labels->end();
   
   length   ->box(FL_NO_BOX);
   gauge    ->box(FL_NO_BOX);
@@ -98,18 +33,6 @@ int main() {
   octave   ->box(FL_NO_BOX);
   tension  ->box(FL_NO_BOX);
   frequency->box(FL_NO_BOX);
-  labels->end();
-
-  StringView* view = new StringView(40,150,860,400);
-  selector->init(view);
-
-  addUp->callback(addUp_cb,view);
-  addDown->callback(addDown_cb,view);
-  notesUp->callback(notesUp_cb,view);
-  notesDown->callback(notesDown_cb,view);
-
-  ScaleLengthSet scale {scaleMin,scaleMax,view};
-  scaleButton->callback(setScale_cb,&scale);
 
 
   window->resizable(view);

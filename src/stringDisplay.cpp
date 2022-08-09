@@ -21,8 +21,8 @@ StringDisplay::StringDisplay(strlib::String* string, int position) : Fl_Pack(lef
   this->spacing(itemSpacing);
 
   string_ = string;
+  
   /* Add all widgets as part of the pack*/
-  this->begin();
   length_   = new Fl_Value_Input(0,0,100,60,0);
   gauge_    = new Fl_Value_Input(0,0,80,60,0);
   type_     = new Fl_Choice(0,0,80,60,0);

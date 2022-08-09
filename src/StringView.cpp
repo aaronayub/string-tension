@@ -7,6 +7,7 @@
 
 StringView::StringView(int x, int y, int w, int h, const char *label) : Fl_Group(x, y, w, h, label) {
     list_ = {};
+    this->end();
 }
 
 // Replaces the current set of strings with a new one
