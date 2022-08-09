@@ -9,7 +9,7 @@ int main() {
   Fl_Window* window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
 
-  StringView* view = new StringView(40,150,860,400);
+  StringView* view = new StringView(40,150,860,750);
   ControlPanel* panel = new ControlPanel();
   panel->init(view);
 
