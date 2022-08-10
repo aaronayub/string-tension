@@ -8,6 +8,7 @@
 StringView::StringView(int x, int y, int w, int h, const char *label) : Fl_Group(x, y, w, h, label) {
     list_ = {};
     this->end();
+    this->y_ = y;
 }
 
 // Replaces the current set of strings with a new one
@@ -17,7 +18,7 @@ void StringView::applySet(std::vector<strlib::String*>& set) {
     }
     list_.clear();
     for (int i = 0; i < set.size(); i++) {
-        StringDisplay* d = new StringDisplay(set[i],i);
+        StringDisplay* d = new StringDisplay(set[i],i,y_);
         list_.push_back(d);
         this->add(d);
     }
@@ -48,7 +49,7 @@ void StringView::addString(bool higher) {
   // Create a string by default if the list is empty
   if (list_.empty()) {
     strlib::String* newStr = new strlib::String(25.5,10,strlib::PL,strlib::notes::E,4);
-    StringDisplay* d = new StringDisplay(newStr, 0);
+    StringDisplay* d = new StringDisplay(newStr, 0,y_);
     this->add(d);
     list_.push_back(d);
   }
@@ -56,12 +57,12 @@ void StringView::addString(bool higher) {
     StringDisplay* d;
     if (higher) { // Adding a higher string
       strlib::String* newStr = new strlib::String(*(list_.front()->getStringPtr()),true);
-      d = new StringDisplay(newStr, 0);
+      d = new StringDisplay(newStr, 0,y_);
       list_.push_front(d);
     }
     else { // Adding a lower string
       strlib::String* newStr = new strlib::String(*(list_.back()->getStringPtr()),false);
-      d = new StringDisplay(newStr, list_.size());
+      d = new StringDisplay(newStr, list_.size(),y_);
       list_.push_back(d);
     }
 

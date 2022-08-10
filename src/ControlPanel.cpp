@@ -7,8 +7,8 @@
 
 #include "./ControlPanel.h"
 
-ControlPanel::ControlPanel() {
-  Fl_Pack* pack1 = new Fl_Pack(40,30,100,40);
+ControlPanel::ControlPanel(int y) {
+  Fl_Pack* pack1 = new Fl_Pack(40,y,100,40);
   pack1->type(Fl_Pack::HORIZONTAL);
   pack1->spacing(10);
   selector_ = new SetSelector(0,0,160,0);
@@ -21,7 +21,7 @@ ControlPanel::ControlPanel() {
   scaleMax_->textsize(18);
   pack1->end();
 
-  Fl_Pack* pack2 = new Fl_Pack(40,80,100,40);
+  Fl_Pack* pack2 = new Fl_Pack(40,y+50,100,40);
   pack2->type(Fl_Pack::HORIZONTAL);
   pack2->spacing(10);
   Fl_Output* notesLabel = new Fl_Output(0,0,80,0);

@@ -19,4 +19,5 @@ class StringView : public Fl_Group {
 
     private:
         std::deque<StringDisplay*> list_;
+        int y_;
 };

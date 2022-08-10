@@ -13,10 +13,10 @@
 
 static constexpr int itemSpacing = 10;
 static constexpr int packHeight = 40;
-static constexpr int topMargin = 150;
 static constexpr int leftMargin = 40;
 
-StringDisplay::StringDisplay(strlib::String* string, int position) : Fl_Pack(leftMargin,topMargin + position * (packHeight + itemSpacing), 0, packHeight, 0) {
+StringDisplay::StringDisplay(strlib::String* string, int position, int topMargin) : Fl_Pack(leftMargin,topMargin + position * (packHeight + itemSpacing), 0, packHeight, 0) {
+  this->topMargin_ = topMargin;
   this->type(Fl_Pack::HORIZONTAL);
   this->spacing(itemSpacing);
 
@@ -79,7 +79,7 @@ void StringDisplay::remove() {
 
 /* Repositioning / re-ordering the display for when a new string is added or deleted. */
 void StringDisplay::reposition(int position) {
-  this->position(leftMargin,topMargin + position * (packHeight + itemSpacing));
+  this->position(leftMargin,topMargin_ + position * (packHeight + itemSpacing));
 }
 
 /* Callback for when a user changes string type */

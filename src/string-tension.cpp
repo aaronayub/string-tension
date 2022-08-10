@@ -4,16 +4,19 @@
 
 #include "./StringView.h"
 #include "./ControlPanel.h"
+#include "./Menubar.h"
 
 int main() {
   Fl_Window* window = new Fl_Window(900,900, "String Tension Calculator");
   Fl::scheme("gtk+");
 
-  StringView* view = new StringView(40,150,860,750);
-  ControlPanel* panel = new ControlPanel();
+  Menubar* menu = new Menubar(0,0,900,30);
+
+  ControlPanel* panel = new ControlPanel(60);
+  StringView* view = new StringView(40,180,860,720);
   panel->init(view);
 
-  Fl_Pack* labels = new Fl_Pack(40,150,100,40);
+  Fl_Pack* labels = new Fl_Pack(40,180,100,40);
   labels->type(Fl_Pack::HORIZONTAL);
   labels->spacing(10);
   labels->begin();

@@ -10,7 +10,7 @@
 
 class ControlPanel {
     public:
-        ControlPanel();
+        ControlPanel(int y);
         void init(StringView* view);
     private:
         SetSelector* selector_;

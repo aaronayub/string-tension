@@ -12,7 +12,7 @@ as well as how it is displayed in the GUI. */
 
 class StringDisplay : public Fl_Pack {
   public:
-    StringDisplay(strlib::String* string, int position);
+    StringDisplay(strlib::String* string, int position, int topMargin);
     void remove();
     void reposition(int position);
     
@@ -37,4 +37,5 @@ class StringDisplay : public Fl_Pack {
     static void length_cb(Fl_Widget* w, void* v);
     static void gauge_cb(Fl_Widget* w, void* v);
     static void octave_cb(Fl_Widget* w, void* v);
+    int topMargin_;
 };
