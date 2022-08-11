@@ -3,7 +3,6 @@
 
 #include <FL/Fl.H>
 #include <FL/Fl_Menu_Bar.H>
-#include <FL/Fl_Menu_Item.H>
 
 class Menubar : public Fl_Menu_Bar {
     public:
@@ -11,3 +10,5 @@ class Menubar : public Fl_Menu_Bar {
 };
 
 static void quit_cb(Fl_Widget*, void*);
+static void help_cb(Fl_Widget*, void*);
+static void about_cb(Fl_Widget*, void*);
