@@ -7,13 +7,13 @@
 #include "./Menubar.h"
 
 int main() {
-  Fl_Window* window = new Fl_Window(900,900, "String Tension Calculator");
+  Fl_Window* window = new Fl_Window(750,900, "String Tension Calculator");
   Fl::scheme("gtk+");
 
-  Menubar* menu = new Menubar(0,0,900,30);
+  Menubar* menu = new Menubar(0,0,750,30);
 
   ControlPanel* panel = new ControlPanel(60);
-  StringView* view = new StringView(40,180,860,720);
+  StringView* view = new StringView(40,180,700,720);
   panel->init(view);
 
   Fl_Pack* labels = new Fl_Pack(40,180,100,40);

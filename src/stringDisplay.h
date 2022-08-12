@@ -12,9 +12,8 @@ as well as how it is displayed in the GUI. */
 
 class StringDisplay : public Fl_Pack {
   public:
-    StringDisplay(strlib::String* string, int position, int topMargin);
+    StringDisplay(strlib::String* string);
     void remove();
-    void reposition(int position);
     
     strlib::String* getStringPtr();
     void updateFrequency();
@@ -37,5 +36,4 @@ class StringDisplay : public Fl_Pack {
     static void length_cb(Fl_Widget* w, void* v);
     static void gauge_cb(Fl_Widget* w, void* v);
     static void octave_cb(Fl_Widget* w, void* v);
-    int topMargin_;
 };

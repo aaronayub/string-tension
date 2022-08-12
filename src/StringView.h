@@ -2,14 +2,15 @@
 #pragma once
 
 #include <FL/Fl.H>
-#include <FL/Fl_Group.H>
+#include <FL/Fl_Pack.H>
+#include <FL/Fl_Scroll.H>
 #include <deque>
 #include <vector>
 
 #include "./strlib/string.h"
 
 #include "./stringDisplay.h"
-class StringView : public Fl_Group {
+class StringView : public Fl_Scroll {
     public:
         StringView(int x, int y, int w, int h, const char *label = 0);
         void applySet(std::vector<strlib::String*>& set);
@@ -19,5 +20,5 @@ class StringView : public Fl_Group {
 
     private:
         std::deque<StringDisplay*> list_;
-        int y_;
+        Fl_Pack* pack;
 };

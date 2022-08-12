@@ -1,14 +1,18 @@
 #include <FL/Fl.H>
-#include <FL/Fl_Group.H>
+#include <FL/Fl_Pack.H>
+#include <FL/Fl_Scroll.H>
 
 #include "./StringView.h"
 #include "./stringDisplay.h"
 #include "./strlib/notes.h"
 
-StringView::StringView(int x, int y, int w, int h, const char *label) : Fl_Group(x, y, w, h, label) {
+StringView::StringView(int x, int y, int w, int h, const char *label) : Fl_Scroll(x, y, w, h, label) {
     list_ = {};
+    pack = new Fl_Pack(x,y,w - 20,h);
+    pack->spacing(10);
+    pack->end();
     this->end();
-    this->y_ = y;
+    this->add(pack);
 }
 
 // Replaces the current set of strings with a new one
@@ -18,9 +22,9 @@ void StringView::applySet(std::vector<strlib::String*>& set) {
     }
     list_.clear();
     for (int i = 0; i < set.size(); i++) {
-        StringDisplay* d = new StringDisplay(set[i],i,y_);
+        StringDisplay* d = new StringDisplay(set[i]);
         list_.push_back(d);
-        this->add(d);
+        pack->add(d);
     }
 }
 
@@ -49,26 +53,26 @@ void StringView::addString(bool higher) {
   // Create a string by default if the list is empty
   if (list_.empty()) {
     strlib::String* newStr = new strlib::String(25.5,10,strlib::PL,strlib::notes::E,4);
-    StringDisplay* d = new StringDisplay(newStr, 0,y_);
-    this->add(d);
+    StringDisplay* d = new StringDisplay(newStr);
+    pack->add(d);
     list_.push_back(d);
   }
   else {
     StringDisplay* d;
     if (higher) { // Adding a higher string
       strlib::String* newStr = new strlib::String(*(list_.front()->getStringPtr()),true);
-      d = new StringDisplay(newStr, 0,y_);
+      d = new StringDisplay(newStr);
       list_.push_front(d);
     }
     else { // Adding a lower string
       strlib::String* newStr = new strlib::String(*(list_.back()->getStringPtr()),false);
-      d = new StringDisplay(newStr, list_.size(),y_);
+      d = new StringDisplay(newStr);
       list_.push_back(d);
     }
 
-    this->add(d);
+    // Re-add all elements to reorder them.
     for (int i = 0; i < list_.size(); i++) {
-      list_[i]->reposition(i);
+      pack->add(list_[i]);
     }
   }
   this->parent()->redraw();
