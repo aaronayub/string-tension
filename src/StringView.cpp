@@ -77,3 +77,12 @@ void StringView::addString(bool higher) {
   }
   this->parent()->redraw();
 }
+
+// Removes the lowest string from the set
+void StringView::removeString() {
+  if (list_.empty()) return;
+
+  pack->remove(list_.back());
+  list_.pop_back();
+  this->redraw();
+}

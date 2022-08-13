@@ -29,6 +29,7 @@ ControlPanel::ControlPanel(int y) {
   notesDown_ = new Fl_Button(0,0,30,0,"↓");
   addUp_ = new Fl_Button(0,0,140,0,"Add higher string");
   addDown_ = new Fl_Button(0,0,140,0,"Add lower string");
+  remove_ = new Fl_Button(0,0,120,0,"Remove string");
   pack2->end();
   notesLabel->box(FL_NO_BOX);
   notesLabel->static_value("Shift Notes: ");
@@ -43,6 +44,7 @@ void ControlPanel::init(StringView* view) {
   addDown_->callback(addDown_cb,view);
   notesUp_->callback(notesUp_cb,view);
   notesDown_->callback(notesDown_cb,view);
+  remove_->callback(remove_cb,view);
 
   ScaleLengthSet* scale = new ScaleLengthSet{scaleMin_,scaleMax_,view};
   scaleButton_->callback(setScale_cb,scale);
@@ -78,4 +80,10 @@ void setScale_cb(Fl_Widget* w, void* v) {
   double min = set->min->value();
   double max = set->max->value();
   set->sv->setLengths(min,max);
+}
+
+// Removes the lowest string from the set
+void remove_cb(Fl_Widget* w, void* v) {
+  StringView* view = static_cast<StringView*>(v);
+  view->removeString();
 }

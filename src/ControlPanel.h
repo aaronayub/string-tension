@@ -20,6 +20,7 @@ class ControlPanel {
         Fl_Button* notesDown_;
         Fl_Button* addUp_;
         Fl_Button* addDown_;
+        Fl_Button* remove_;
         Fl_Button* scaleButton_;
 };
 
@@ -35,3 +36,4 @@ static void addDown_cb(Fl_Widget* w, void* v);
 static void notesUp_cb(Fl_Widget* w, void* v);
 static void notesDown_cb(Fl_Widget* w, void* v);
 static void setScale_cb(Fl_Widget* w, void* v);
+static void remove_cb(Fl_Widget* w, void* v);

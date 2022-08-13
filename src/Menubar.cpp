@@ -43,12 +43,15 @@ Above the strings is a list of controls.
 Presets: Discards the current set of strings, replacing it with a new set of preset strings.
 Set Scale: Adjusts the length of all strings on a guitar. If the minimum and maximum length are set (e.g. 25.5 to 27), then all strings will have their lengths adjusted as a multi-scale instrument. If the maximum length is equal to or less than the minimum length, the lengths will be adjusted as a single-scale instrument.
 Shift Notes: Shifts every string one semitone up or down.
-Add string: Adds a new string 5 semitones above or below the first/last string of the set. The gauge and string type will be automatically calculated from the nearest string.)HELPTEXT";
+Add string: Adds a new string 5 semitones above or below the first/last string of the set. The gauge and string type will be automatically calculated from the nearest string.
+Remove string: Removes the lowest string in the set.
+
+Press Esc to close this window.)HELPTEXT";
 
 /* Shows a help dialog */
 void help_cb(Fl_Widget*, void*) {
-    Fl_Window* w = new Fl_Window(700,600, "Help");
-    Fl_Multiline_Output* h = new Fl_Multiline_Output(0,0,700,600);
+    Fl_Window* w = new Fl_Window(700,650, "Help");
+    Fl_Multiline_Output* h = new Fl_Multiline_Output(0,0,700,650);
     h->wrap(FL_INPUT_WRAP);
     h->value(helpText);
 
@@ -63,7 +66,9 @@ It is written in C++, and uses FLTK to render the GUI.
 
 This program is open source, made available under the MIT License.
 
-The source code can be found here: https://github.com/AaronAyub/string-tension)ABOUTTEXT";
+The source code can be found here: https://github.com/AaronAyub/string-tension
+
+Press Esc to close this window.)ABOUTTEXT";
 
 /* Shows dialog detailing the project */
 void about_cb(Fl_Widget*, void*) {
