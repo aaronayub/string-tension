@@ -1,11 +1,12 @@
-/* Testing the String object. */
+/** @file
+ * @brief Tests functionality of the string object */
 
 #include <gtest/gtest.h>
 #include "../src/strlib/string.h"
 #include "../src/strlib/stringweight.h"
 #include "../src/strlib/notes.h"
 
-/* Test an object's values after it is created */
+/** Tests the constructor, and validate its values */
 TEST(stringObjectTest, constructString) {
     strlib::String str = strlib::String(25.5,46,strlib::NW,strlib::notes::E,2);
     
@@ -18,7 +19,7 @@ TEST(stringObjectTest, constructString) {
     EXPECT_NEAR(str.getTension(),17.4693,0.0001);
 }
 
-/* Test updating an object's values */
+/** Creates a string, updates the values and confirms that the values are properly changed */
 TEST(stringObjectTest, updateString) {
     // Create a string, then change all of it's values.
     strlib::String str = strlib::String(25.5,46,strlib::NW,strlib::notes::E,2);
@@ -38,7 +39,7 @@ TEST(stringObjectTest, updateString) {
     EXPECT_NEAR(str.getTension(),13.8744,0.0001);
 }
 
-/* Test adding a string higher */
+/** Tests adding a string higher than the highest string in the set */
 TEST(stringObjectTest, higherString) {
     strlib::String oldStr = strlib::String(25.5,46,strlib::NW,strlib::notes::E,2);
     strlib::String str = strlib::String(oldStr,true);
@@ -52,7 +53,7 @@ TEST(stringObjectTest, higherString) {
     EXPECT_NEAR(str.getTension(),18.5517,0.0001);
 }
 
-/* Test adding a string lower */
+/** Tests adding a lower than the lowest string in the set */
 TEST(stringObjectTest, lowerString) {
     strlib::String oldStr = strlib::String(25.5,26,strlib::NW,strlib::notes::D,3);
     strlib::String str = strlib::String(oldStr,false);

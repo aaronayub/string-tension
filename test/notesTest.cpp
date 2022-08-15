@@ -1,8 +1,10 @@
-/* Tests conversion of notes from name to MIDI, and MIDI to frequency.*/
+/** @file
+ * @brief Tests calculating frequencies of MIDI notes */
 
 #include <gtest/gtest.h>
 #include "../src/strlib/notes.h"
 
+/** Tests that the noteToFrequency function returns an accurate frequency. */
 TEST(strlibTest, noteToFrequencyTest) {
     EXPECT_DOUBLE_EQ(strlib::noteToFrequency(69),440); // Concert Pitch
     EXPECT_DOUBLE_EQ(strlib::noteToFrequency(57),220); // An octave down

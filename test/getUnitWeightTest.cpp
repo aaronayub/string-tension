@@ -1,12 +1,18 @@
-/* Testing for functions for getUnitWeight on strlib */
+/** @file
+ * @brief Tests calculating unit weights of strings */
 
 #include <gtest/gtest.h>
 #include "../src/strlib/stringweight.h"
 
+/**
+ * Tests that unit weights match up with the specified gauges and types.
+ * Tests for matching values, interpolation, and extrapolation.
+ */
 TEST(strlibTest, getUnitWeightTest) {
     // Test negative or 0 value inputs
     EXPECT_DOUBLE_EQ(strlib::getUnitWeight(0,strlib::PL),0);
     EXPECT_DOUBLE_EQ(strlib::getUnitWeight(-100,strlib::PL),0);
+
     // Test finding values which are present in the string lists
     EXPECT_DOUBLE_EQ(strlib::getUnitWeight(7,strlib::PL),0.00001085);
     EXPECT_DOUBLE_EQ(strlib::getUnitWeight(8,strlib::PL),0.00001418);
