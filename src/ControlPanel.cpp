@@ -8,6 +8,7 @@
 #include "./ControlPanel.h"
 
 ControlPanel::ControlPanel(int y) {
+  // Create first row of controls
   Fl_Pack* pack1 = new Fl_Pack(40,y,100,40);
   pack1->type(Fl_Pack::HORIZONTAL);
   pack1->spacing(10);
@@ -21,6 +22,7 @@ ControlPanel::ControlPanel(int y) {
   scaleMax_->textsize(18);
   pack1->end();
 
+  // Create second row of controls
   Fl_Pack* pack2 = new Fl_Pack(40,y+50,100,40);
   pack2->type(Fl_Pack::HORIZONTAL);
   pack2->spacing(10);
@@ -36,45 +38,42 @@ ControlPanel::ControlPanel(int y) {
   notesLabel->set_output();
 }
 
-// Initialize the panel with a reference to the string view it manages
 void ControlPanel::init(StringView* view) {
+  // Initialize the selector, setting its callback and initial value
   selector_->init(view);
 
+  // Set up callbacks for all buttons
   addUp_->callback(addUp_cb,view);
   addDown_->callback(addDown_cb,view);
   notesUp_->callback(notesUp_cb,view);
   notesDown_->callback(notesDown_cb,view);
   remove_->callback(remove_cb,view);
 
+  // Set up callback and inputs for scale length settings
   ScaleLengthSet* scale = new ScaleLengthSet{scaleMin_,scaleMax_,view};
   scaleButton_->callback(setScale_cb,scale);
 }
 
-// Adds a string to the top of the list.
 void addUp_cb(Fl_Widget* w, void* v) {
   StringView* view = static_cast<StringView*>(v);
   view->addString(true);
 }
 
-// Adds a string to the bottom of the list.
 void addDown_cb(Fl_Widget* w, void* v) {
   StringView* view = static_cast<StringView*>(v);
   view->addString(false);
 }
 
-// Increments all notes up by one semitone
 void notesUp_cb(Fl_Widget* w, void* v) {
   StringView* view = static_cast<StringView*>(v);
   view->incrementAll(1);
 }
 
-// Increments all notes down by one semitone
 void notesDown_cb(Fl_Widget* w, void* v) {
   StringView* view = static_cast<StringView*>(v);
   view->incrementAll(-1);
 }
 
-// Sets the scale length of all strings
 void setScale_cb(Fl_Widget* w, void* v) {
   ScaleLengthSet* set = static_cast<ScaleLengthSet*>(v);
   double min = set->min->value();
@@ -82,7 +81,6 @@ void setScale_cb(Fl_Widget* w, void* v) {
   set->sv->setLengths(min,max);
 }
 
-// Removes the lowest string from the set
 void remove_cb(Fl_Widget* w, void* v) {
   StringView* view = static_cast<StringView*>(v);
   view->removeString();

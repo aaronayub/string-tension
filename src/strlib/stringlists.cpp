@@ -1,11 +1,13 @@
-/* The following unit weight measurements are adapted from material made available by D'addario.
-Strings from other brands, materials, or construction processes may have differing unit weights. */
+/**
+ * The unit weight measurements within this file are adapted from material made available by D'addario.
+ * Strings from other brands, materials, or construction processes may have differing unit weights.
+*/
 
 #include <vector>
 #include "stringweight.h"
 
 namespace strlib {
-    // Plain steel strings
+    /** Plain steel strings */
     extern const std::vector<strlib::StringWeight> stringsPL {
         {7, 0.00001085},
         {8, 0.00001418},
@@ -26,7 +28,7 @@ namespace strlib {
         {26, 0.00014975}
     };
 
-    // Nickel wound, steel core strings
+    /** Nickel wound, steel core strings */
     extern const std::vector<strlib::StringWeight> stringsNW {
         {17, 0.00005524},
         {18, 0.00006215},
@@ -63,7 +65,7 @@ namespace strlib {
         {80, 0.00115011}
     };
 
-    // Nickel wound, steel core bass strings
+    /** Nickel wound, steel core bass strings */
     extern const std::vector<strlib::StringWeight> stringsXLB {
         {28, 0.00015433},
         {32, 0.00019000},

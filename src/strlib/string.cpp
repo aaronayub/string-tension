@@ -1,4 +1,3 @@
-/* The class for one string in the calculator */
 #include <cmath>
 #include "stringtype.h"
 #include "notes.h"
@@ -8,19 +7,20 @@
 
 namespace strlib {
     String::String(double length, int gauge, strlib::StringType type, int note, int octave) {
+        /** Copy arguments into member variables */
         length_ = length < 0 ? 0 : length;
         gauge_ = gauge < 0 ? 0 : gauge;
         type_ = type;
         note_ = note;
         octave_ = octave;
 
+        /** Calculate the MIDI note, frequency, and tension */
         updateNote();
         updateTension();
     }
 
-    /* Constructor to create string based on an existing string.
-    The new string is tuned 5 semitones higher or lower. */
     String::String(const String& string, bool higher) {
+        /** Copy properties from reference string to the new string */
         length_ = string.getLength();
         gauge_= string.getGauge();
         type_ = string.getType();
@@ -86,7 +86,6 @@ namespace strlib {
     
     double String::getTension() const { return tension_; }
 
-    // Increase the string's note by a specified amount.
     void String::incrementNote(int amount) {
         midiNote_+=amount;
         note_ = midiNote_ % 12;
@@ -95,12 +94,10 @@ namespace strlib {
         updateTension();
     }
 
-    // Updates the tension of the string.
     void String::updateTension() {
         tension_ = strlib::calcTension(strlib::getUnitWeight(gauge_,type_),length_,frequency_);
     }
 
-    // Updates the string's fundamental frequency
     void String::updateNote() {
         midiNote_ = note_ + ((octave_ + 1) * 12);
         frequency_ = strlib::noteToFrequency(midiNote_);

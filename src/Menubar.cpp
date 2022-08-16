@@ -21,11 +21,11 @@ Menubar::Menubar (int x, int y, int w, int h) : Fl_Menu_Bar (x,y,w,h) {
     this->copy(menuItems);
 }
 
-/* Exits the program */
 void quit_cb(Fl_Widget*, void*) {
     std::exit(0);
 }
 
+/** Text displayed in the help dialog */
 const char* helpText = R"HELPTEXT(This program is used to calculate the tension of guitar strings or bass strings.
 
 When starting the program, a list of six strings are displayed. Each string occupies one row of values. You are able to adjust the length, gauge, string type, string note, and octave of each string., and the tension and frequency of the note will be adjusted automatically.
@@ -48,7 +48,6 @@ Remove string: Removes the lowest string in the set.
 
 Press Esc to close this window.)HELPTEXT";
 
-/* Shows a help dialog */
 void help_cb(Fl_Widget*, void*) {
     Fl_Window* w = new Fl_Window(700,650, "Help");
     Fl_Multiline_Output* h = new Fl_Multiline_Output(0,0,700,650);
@@ -60,6 +59,7 @@ void help_cb(Fl_Widget*, void*) {
     while (w->shown()) Fl::wait();
 }
 
+/** Text displayed in the about dialog */
 const char* aboutText = R"ABOUTTEXT(This program is written by Aaron Ayub.
 
 It is written in C++, and uses FLTK to render the GUI.
@@ -70,7 +70,6 @@ The source code can be found here: https://github.com/AaronAyub/string-tension
 
 Press Esc to close this window.)ABOUTTEXT";
 
-/* Shows dialog detailing the project */
 void about_cb(Fl_Widget*, void*) {
     Fl_Window* w = new Fl_Window(700,200, "Help");
     Fl_Multiline_Output* h = new Fl_Multiline_Output(0,0,700,200);
