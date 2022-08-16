@@ -42,11 +42,17 @@ void StringView::setLengths(double min, double max) {
         max = min;
     };
 
-    for (int i = 0; i < list_.size(); i++) {
-        // Calculate the length of the string
-        double length = min + (max - min) * ((double)i / (list_.size() - 1));
+    // Avoid division by zero if the set has only a single string
+    if (list_.size() == 1) {
+        list_.front()->setLength(min);
+    }
+    else {
+        for (int i = 0; i < list_.size(); i++) {
+            // Calculate the length of the string
+            double length = min + (max - min) * ((double)i / (list_.size() - 1));
 
-        list_.at(i)->setLength(length);
+            list_.at(i)->setLength(length);
+        }
     }
 }
 
