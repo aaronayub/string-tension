@@ -2,7 +2,7 @@
 
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
-#include <FL/Fl_Text_Display.H>
+#include <FL/Fl_Output.H>
 
 #include "./StringView.h"
 #include "./ControlPanel.h"
@@ -22,16 +22,16 @@ int main() {
   labels->type(Fl_Pack::HORIZONTAL);
   labels->spacing(10);
   labels->begin();
-  Fl_Text_Display* length   = new Fl_Text_Display(0,0,100,40,"Length (in)");
-  Fl_Text_Display* gauge    = new Fl_Text_Display(0,0,80,40,"Gauge");
-  Fl_Text_Display* type     = new Fl_Text_Display(0,0,80,40,"Type");
-  Fl_Text_Display* note     = new Fl_Text_Display(0,0,90,40,"Note");
-  Fl_Text_Display* octave   = new Fl_Text_Display(0,0,60,40,"Octave");
-  Fl_Text_Display* tension  = new Fl_Text_Display(0,0,100,40,"Tension (lbs)");
-  Fl_Text_Display* frequency= new Fl_Text_Display(0,0,100,40,"Frequency (Hz)");
+  Fl_Output* length   = new Fl_Output(0,0,100,40,"Length (in)");
+  Fl_Output* gauge    = new Fl_Output(0,0,80,40,"Gauge");
+  Fl_Output* type     = new Fl_Output(0,0,80,40,"Type");
+  Fl_Output* note     = new Fl_Output(0,0,90,40,"Note");
+  Fl_Output* octave   = new Fl_Output(0,0,60,40,"Octave");
+  Fl_Output* tension  = new Fl_Output(0,0,100,40,"Tension (lbs)");
+  Fl_Output* frequency= new Fl_Output(0,0,100,40,"Frequency (Hz)");
   labels->end();
   
-  /** Remove the backgrounds from each Text Display */
+  /** Remove the backgrounds from each label */
   length   ->box(FL_NO_BOX);
   gauge    ->box(FL_NO_BOX);
   type     ->box(FL_NO_BOX);
@@ -39,6 +39,15 @@ int main() {
   octave   ->box(FL_NO_BOX);
   tension  ->box(FL_NO_BOX);
   frequency->box(FL_NO_BOX);
+
+  /* Move each label above the invisible output boxes */
+  length   ->align(FL_ALIGN_TOP);
+  gauge    ->align(FL_ALIGN_TOP);
+  type     ->align(FL_ALIGN_TOP);
+  note     ->align(FL_ALIGN_TOP);
+  octave   ->align(FL_ALIGN_TOP);
+  tension  ->align(FL_ALIGN_TOP);
+  frequency->align(FL_ALIGN_TOP);
 
   /** Allow the window to be resized. The StringView will be resized with the window. */
   window->resizable(view);
