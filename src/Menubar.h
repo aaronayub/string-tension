@@ -16,7 +16,7 @@ class Menubar : public Fl_Menu_Bar {
 static void quit_cb(Fl_Widget*, void*);
 
 /** Displays a dialog offering users instructions on how to use the program */
-static void help_cb(Fl_Widget*, void*);\
+static void help_cb(Fl_Widget*, void*);
 
 /** Displays a dialog detailing information on the program */
 static void about_cb(Fl_Widget*, void*);
