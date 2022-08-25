@@ -30,7 +30,7 @@ int main() {
   Fl_Output* tension  = new Fl_Output(0,0,100,40,"Tension (lbs)");
   Fl_Output* frequency= new Fl_Output(0,0,100,40,"Frequency (Hz)");
   labels->end();
-  
+
   /** Remove the backgrounds from each label */
   length   ->box(FL_NO_BOX);
   gauge    ->box(FL_NO_BOX);
@@ -48,6 +48,24 @@ int main() {
   octave   ->align(FL_ALIGN_TOP);
   tension  ->align(FL_ALIGN_TOP);
   frequency->align(FL_ALIGN_TOP);
+
+  /** Disable selectino for each label*/
+  length   ->align(FL_ALIGN_TOP);
+  gauge    ->align(FL_ALIGN_TOP);
+  type     ->align(FL_ALIGN_TOP);
+  note     ->align(FL_ALIGN_TOP);
+  octave   ->align(FL_ALIGN_TOP);
+  tension  ->align(FL_ALIGN_TOP);
+  frequency->align(FL_ALIGN_TOP);
+
+  /** Prevent the outputs from being selected*/
+  length   ->set_output();
+  gauge    ->set_output();
+  type     ->set_output();
+  note     ->set_output();
+  octave   ->set_output();
+  tension  ->set_output();
+  frequency->set_output();
 
   /** Allow the window to be resized. The StringView will be resized with the window. */
   window->resizable(view);
