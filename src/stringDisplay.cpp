@@ -111,7 +111,7 @@ void StringDisplay::gauge_cb(Fl_Widget *w, void *v) {
     StringDisplay *display{static_cast<StringDisplay *>(v)};
     strlib::String *strptr = display->getStringPtr();
 
-    int gauge = input->value();
+    double gauge = input->value();
     gauge = gauge < 0 ? -gauge : gauge;
     strptr->setGauge(gauge);
     display->updateTension();

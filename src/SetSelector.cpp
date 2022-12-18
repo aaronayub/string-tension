@@ -36,19 +36,19 @@ void applySet_cb(Fl_Widget* w, void* v) {
     switch (selector->value()) {
     // Six String Guitar
     case 0:
-        set.push_back(new strlib::String{25.5,10,strlib::PL,strlib::notes::E, 4});
-        set.push_back(new strlib::String{25.5,13,strlib::PL,strlib::notes::B, 3});
-        set.push_back(new strlib::String{25.5,17,strlib::PL,strlib::notes::G, 3});
-        set.push_back(new strlib::String{25.5,26,strlib::NW,strlib::notes::D, 3});
-        set.push_back(new strlib::String{25.5,36,strlib::NW,strlib::notes::A, 2});
-        set.push_back(new strlib::String{25.5,46,strlib::NW,strlib::notes::E, 2});
+        set.push_back(new strlib::String{25.5,10.0,strlib::PL,strlib::notes::E, 4});
+        set.push_back(new strlib::String{25.5,13.0,strlib::PL,strlib::notes::B, 3});
+        set.push_back(new strlib::String{25.5,17.0,strlib::PL,strlib::notes::G, 3});
+        set.push_back(new strlib::String{25.5,26.0,strlib::NW,strlib::notes::D, 3});
+        set.push_back(new strlib::String{25.5,36.0,strlib::NW,strlib::notes::A, 2});
+        set.push_back(new strlib::String{25.5,46.0,strlib::NW,strlib::notes::E, 2});
         break;
     // Four String Bass
     case 1:
-        set.push_back(new strlib::String{34,45,strlib::XLB,strlib::notes::G, 2});
-        set.push_back(new strlib::String{34,65,strlib::XLB,strlib::notes::D, 2});
-        set.push_back(new strlib::String{34,85,strlib::XLB,strlib::notes::A, 1});
-        set.push_back(new strlib::String{34,105,strlib::XLB,strlib::notes::E, 1});
+        set.push_back(new strlib::String{34,45.0,strlib::XLB,strlib::notes::G, 2});
+        set.push_back(new strlib::String{34,65.0,strlib::XLB,strlib::notes::D, 2});
+        set.push_back(new strlib::String{34,85.0,strlib::XLB,strlib::notes::A, 1});
+        set.push_back(new strlib::String{34,105.0,strlib::XLB,strlib::notes::E, 1});
         break;
     }
 

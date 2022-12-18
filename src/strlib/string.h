@@ -17,7 +17,7 @@ namespace strlib {
          * @param note Note of the string in 12TET
          * @param octave Octave of the note
          */
-        String(double length, int gauge, strlib::StringType type, int note, int octave);
+        String(double length, double gauge, strlib::StringType type, int note, int octave);
 
         /**
          * Constructs a string above or below another string.
@@ -36,13 +36,13 @@ namespace strlib {
         void setLength(double length);
 
         /** @return Diameter of the string in thousandths of an inch */
-        int getGauge() const;
+        double getGauge() const;
 
         /**
          * Sets the gauge of the string
          * @param gauge Diameter of the string in thousandths of an inch
          */
-        void setGauge(int gauge);
+        void setGauge(double gauge);
 
         /** @return Type of string construction and material */
         strlib::StringType getType() const;
@@ -83,7 +83,7 @@ namespace strlib {
 
     private:
         double length_; /** Length of the string in inches */
-        int gauge_; /** Diameter of the string in thousandths of an inch */
+        double gauge_; /** Diameter of the string in thousandths of an inch */
         strlib::StringType type_; /** Type of string construction and material */
         int note_; /** Note of the string, where C is index 0, and B is index 11. */
         int octave_; /** Octave of the note */

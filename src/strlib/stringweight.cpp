@@ -7,7 +7,7 @@ namespace strlib {
     extern const std::vector<strlib::StringWeight> stringsNW;
     extern const std::vector<strlib::StringWeight> stringsXLB;
     
-    double getUnitWeight(int gauge, StringType type) {
+    double getUnitWeight(double gauge, StringType type) {
         // Prevent the user from entering invalid gauges
         if (gauge <= 0) {
             return 0;
@@ -43,20 +43,20 @@ namespace strlib {
         else return estimateWeight(gauge, list[list.size() - 2], list.back());
     }
 
-    double estimateWeight(int gauge, const StringWeight& low, const StringWeight& high) {
+    double estimateWeight(double gauge, const StringWeight& low, const StringWeight& high) {
         // Calculate the ratio of gauge/unit weight between the two reference strings.
-        int refGaugeDifference = high.gauge - low.gauge;
+        double refGaugeDifference = high.gauge - low.gauge;
         double refWeightDifference = high.unitWeight - low.unitWeight;
         double ratio = refWeightDifference / refGaugeDifference;
 
         // If the input gauge is closer to the larger reference string, use that for the estimate
-        if (abs(gauge - high.gauge) < abs(gauge - low.gauge)) {
-            int gaugeDifference = gauge - high.gauge;
+        if (std::abs(gauge - high.gauge) < std::abs(gauge - low.gauge)) {
+            double gaugeDifference = gauge - high.gauge;
             return high.unitWeight + (gaugeDifference * ratio);
         }
         // Otherwise, use the smaller string for the estimate
         else {
-            int gaugeDifference = gauge - low.gauge;
+            double gaugeDifference = gauge - low.gauge;
             return low.unitWeight + (gaugeDifference * ratio);
         }
     }

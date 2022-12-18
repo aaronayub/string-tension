@@ -8,7 +8,7 @@
 namespace strlib {
     /** A correlation of unit weight to a string of a given gauge */
     struct StringWeight {
-        int gauge;
+        double gauge;
         double unitWeight;
     };
 
@@ -18,7 +18,7 @@ namespace strlib {
      * @param type Type of string construction or material
      * @return The unit weight in lbs/in
      */
-    double getUnitWeight(int gauge, StringType type);
+    double getUnitWeight(double gauge, StringType type);
 
     /**
      * Interpolates or extrapolates the unit weight of a string
@@ -27,5 +27,5 @@ namespace strlib {
      * @param high A higher gauge string of the same type to use for estimation
      * @return The estimated unit weight
      */
-    double estimateWeight(int gauge, const StringWeight& low, const StringWeight& high);
+    double estimateWeight(double gauge, const StringWeight& low, const StringWeight& high);
 }

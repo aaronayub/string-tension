@@ -6,7 +6,7 @@
 #include "string.h"
 
 namespace strlib {
-    String::String(double length, int gauge, strlib::StringType type, int note, int octave) {
+    String::String(double length, double gauge, strlib::StringType type, int note, int octave) {
         /** Copy arguments into member variables */
         length_ = length < 0 ? 0 : length;
         gauge_ = gauge < 0 ? 0 : gauge;
@@ -44,7 +44,7 @@ namespace strlib {
 
         // Round sufficiently large bass strings up within 0.005 gauge
         if (type_ == strlib::XLB && gauge_ > 50) {
-            gauge_+= gauge_ % 5;
+            gauge_+= fmod(gauge_,5);
         }
 
         updateTension();
@@ -56,8 +56,8 @@ namespace strlib {
         updateTension();
     }
 
-    int String::getGauge() const { return gauge_; }
-    void String::setGauge(int gauge) {
+    double String::getGauge() const { return gauge_; }
+    void String::setGauge(double gauge) {
         gauge_ = gauge < 0 ? 0 : gauge;
         updateTension();
     }

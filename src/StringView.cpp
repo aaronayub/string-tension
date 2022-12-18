@@ -59,7 +59,7 @@ void StringView::setLengths(double min, double max) {
 void StringView::addString(bool higher) {
     // Create a string by default if the list is empty
     if (list_.empty()) {
-        strlib::String* newStr = new strlib::String(25.5,10,strlib::PL,strlib::notes::E,4);
+        strlib::String* newStr = new strlib::String(25.5,10.0,strlib::PL,strlib::notes::E,4);
         StringDisplay* d = new StringDisplay(newStr);
         pack->add(d);
         list_.push_back(d);
