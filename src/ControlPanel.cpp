@@ -12,7 +12,8 @@ ControlPanel::ControlPanel(int y) {
   Fl_Pack* pack1 = new Fl_Pack(40,y,100,40);
   pack1->type(Fl_Pack::HORIZONTAL);
   pack1->spacing(10);
-  selector_ = new SetSelector(0,0,160,0);
+  setSelector_ = new SetSelector(0,0,160,0);
+  tuningSelector_ = new TuningSelector(0,0,160,0);
   scaleMin_ = new Fl_Value_Input(0,0,100,0,"Min Length");
   scaleMax_ = new Fl_Value_Input(0,0,100,0,"Max Length");
   scaleButton_ = new Fl_Button(0,0,80,0,"Set Scale");
@@ -39,8 +40,9 @@ ControlPanel::ControlPanel(int y) {
 }
 
 void ControlPanel::init(StringView* view) {
-  // Initialize the selector, setting its callback and initial value
-  selector_->init(view);
+  // Initialize the selectors, setting their callbacks and initial values
+  setSelector_->init(view);
+  tuningSelector_->init(setSelector_);
 
   // Set up callbacks for all buttons
   addUp_->callback(addUp_cb,view);

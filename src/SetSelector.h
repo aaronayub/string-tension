@@ -18,8 +18,19 @@ class SetSelector : public Fl_Choice {
          * @param view The StringView that the selector controls
          */
         void init(StringView* view);
+
+        /** Gets the value of the currentSet
+         @return The numerical value of the last selected set*/
+        int getCurrentSet();
+
+        /** Sets the value of the currentSet
+         * @param The numerical value of the set
+         */
+        void setCurrentSet(int set);
+
     private:
         StringView* view_;
+        int currentSet_; // Choice value of the last selected set. This needs to be stored to allow the callback to be usable externally
 };
 
 /** Replaces the set of strings in the StringView with the new set chosen by the SetSelector

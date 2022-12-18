@@ -8,6 +8,7 @@
 
 #include "./StringView.h"
 #include "./SetSelector.h"
+#include "./TuningSelector.h"
 
 /**
  * \brief A set of controls to manage a StringView
@@ -25,7 +26,8 @@ class ControlPanel {
         */
         void init(StringView* view);
     private:
-        SetSelector* selector_;
+        SetSelector* setSelector_;
+        TuningSelector* tuningSelector_;
         Fl_Value_Input* scaleMin_;
         Fl_Value_Input* scaleMax_;
         Fl_Button* notesUp_;

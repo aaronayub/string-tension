@@ -23,17 +23,26 @@ void SetSelector::init(StringView* view) {
     this->callback(applySet_cb,view_);
 
     // Apply the string set on startup
-    this->value(0);
+    this->setCurrentSet(0);
     applySet_cb(this,view_);
 }
+
+int SetSelector::getCurrentSet() { return currentSet_; }
+
+void SetSelector::setCurrentSet(int set) { currentSet_ = set; }
 
 void applySet_cb(Fl_Widget* w, void* v) {
     StringView* view = static_cast<StringView*>(v);
     SetSelector* selector = static_cast<SetSelector*>(w);
 
+    // Change the current set only if the callback was called by SetSelector.
+    if (selector->value() > -1) {
+        selector->setCurrentSet(selector->value());
+    }
+
     // Listing of string sets; should be in the same order as the labels from the constructor.
     std::vector<strlib::String*> set {};
-    switch (selector->value()) {
+    switch (selector->getCurrentSet()) {
     // Six String Guitar
     case 0:
         set.push_back(new strlib::String{25.5,10.0,strlib::PL,strlib::notes::E, 4});
