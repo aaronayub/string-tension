@@ -10,7 +10,7 @@ TuningSelector::TuningSelector(int x, int y, int w, int h, const char* label): F
     this->add("Perfect Fourths");
     this->add("Drop Tuning");
     this->when(FL_WHEN_CHANGED);
-    this->label("Tuning:");
+    this->label("Preset Tuning:");
     this->align(FL_ALIGN_TOP);
 }
 
@@ -18,7 +18,10 @@ void TuningSelector::init(SetSelector* setSelector) {
     this->callback(tuningSelector_cb,setSelector);
 }
 
+/** Update the tuning on the setSelector, and then trigger the setSelector's callback. */
 static void tuningSelector_cb(Fl_Widget* w, void* v) {
     SetSelector* setSelector = static_cast<SetSelector*>(v);
+    TuningSelector* tuningSelector = static_cast<TuningSelector*>(w);
+    setSelector->setCurrentTuning(tuningSelector->value());
     setSelector->do_callback();
 }

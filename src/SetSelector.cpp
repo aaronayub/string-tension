@@ -22,14 +22,39 @@ void SetSelector::init(StringView* view) {
     view_ = view;
     this->callback(applySet_cb,view_);
 
-    // Apply the string set on startup
+    // Apply the string set and tuning on startup
     this->setCurrentSet(0);
+    this->setCurrentTuning(0);
     applySet_cb(this,view_);
 }
 
 int SetSelector::getCurrentSet() { return currentSet_; }
-
 void SetSelector::setCurrentSet(int set) { currentSet_ = set; }
+
+int SetSelector::getCurrentTuning() { return currentTuning_; }
+void SetSelector::setCurrentTuning(int tuning) { currentTuning_ = tuning; }
+
+/** Tune the set by incrementing certain strings based on the tuning.*/
+void SetSelector::tuneSet(std::vector<strlib::String*>& set, int tuning, bool isGuitar) {
+    switch (tuning) {
+        // Standard Tuning, do nothing.
+        case 0:
+            break;
+        // Perfect Fourths, increment top two strings on guitar. Same as Standard on Bass.
+        case 1:
+            if (isGuitar && set.size() > 1) {
+                set[0]->incrementNote(1);
+                set[1]->incrementNote(1);
+            }
+            break;
+        // Drop Tuning, decrement the lowest string by a whole tone.
+        case 2:
+            if (!set.empty()) {
+                set.back()->incrementNote(-2);
+            }
+            break;
+    }
+}
 
 void applySet_cb(Fl_Widget* w, void* v) {
     StringView* view = static_cast<StringView*>(v);
@@ -42,6 +67,8 @@ void applySet_cb(Fl_Widget* w, void* v) {
 
     // Listing of string sets; should be in the same order as the labels from the constructor.
     std::vector<strlib::String*> set {};
+    bool isGuitar = false;
+
     switch (selector->getCurrentSet()) {
     // Six String Guitar
     case 0:
@@ -51,6 +78,7 @@ void applySet_cb(Fl_Widget* w, void* v) {
         set.push_back(new strlib::String{25.5,26.0,strlib::NW,strlib::notes::D, 3});
         set.push_back(new strlib::String{25.5,36.0,strlib::NW,strlib::notes::A, 2});
         set.push_back(new strlib::String{25.5,46.0,strlib::NW,strlib::notes::E, 2});
+        isGuitar = true;
         break;
     // Four String Bass
     case 1:
@@ -61,6 +89,7 @@ void applySet_cb(Fl_Widget* w, void* v) {
         break;
     }
 
+    SetSelector::tuneSet(set,selector->getCurrentTuning(),isGuitar);
     view->applySet(set);
 
     // Reset the set value, so a user can repeatedly select the same set

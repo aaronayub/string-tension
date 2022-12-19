@@ -20,17 +20,34 @@ class SetSelector : public Fl_Choice {
         void init(StringView* view);
 
         /** Gets the value of the currentSet
-         @return The numerical value of the last selected set*/
+         @return The numerical value of the last selected set */
         int getCurrentSet();
 
         /** Sets the value of the currentSet
-         * @param The numerical value of the set
+         * @param set The numerical value of the set
          */
         void setCurrentSet(int set);
+
+        /** Gets the value of the currentTuning
+         @return The numerical value of the last selected tuning */
+        int getCurrentTuning();
+
+        /** Sets the value of the currentTuning
+         * @param tuning The numerical value of the tuning
+         */
+        void setCurrentTuning(int set);
+
+        /** Tunes a string set based on whether it is a guitar or bass
+         * @param set The string set to tune
+         * @param tuning The numerical value of the tuning
+         * @param isGuitar True if the set is for a guitar, false if it is for a bass
+         */
+        static void tuneSet(std::vector<strlib::String*>&, int tuning, bool isGuitar);
 
     private:
         StringView* view_;
         int currentSet_; // Choice value of the last selected set. This needs to be stored to allow the callback to be usable externally
+        int currentTuning_; // Choice value of the last selected tuning.
 };
 
 /** Replaces the set of strings in the StringView with the new set chosen by the SetSelector

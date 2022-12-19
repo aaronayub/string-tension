@@ -21,7 +21,7 @@ class TuningSelector : public Fl_Choice {
         void init(SetSelector* setSelector);
 };
 
-/** Triggers the callback of the associated setSelector.
+/** Re-creates the string set and tuning
  @param w The TuningSelector widget
  @param v The SetSelector widget whose callback is activated. */
 static void tuningSelector_cb(Fl_Widget* w, void* v);
