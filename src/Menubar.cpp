@@ -26,7 +26,7 @@ void quit_cb(Fl_Widget*, void*) {
 }
 
 /** Text displayed in the help dialog */
-const char* helpText = R"HELPTEXT(This program is used to calculate the tension of guitar strings or bass strings.
+const char *helpText = R"HELPTEXT(This program is used to calculate the tension of guitar strings or bass strings.
 
 When starting the program, a list of six strings are displayed. Each string occupies one row of values. You are able to adjust the length, gauge, string type, string note, and octave of each string., and the tension and frequency of the note will be adjusted automatically.
 
@@ -41,7 +41,9 @@ Frequency: Frequency of the note in Hz.
 
 Above the strings is a list of controls.
 Presets: Discards the current set of strings, replacing it with a new set of preset strings.
+Preset Tuning: Selects which tuning the a new preset will be in.
 Set Scale: Adjusts the length of all strings on a guitar. If the minimum and maximum length are set (e.g. 25.5 to 27), then all strings will have their lengths adjusted as a multi-scale instrument. If the maximum length is equal to or less than the minimum length, the lengths will be adjusted as a single-scale instrument.
+
 Shift Notes: Shifts every string one semitone up or down.
 Add string: Adds a new string 5 semitones above or below the first/last string of the set. The gauge and string type will be automatically calculated from the nearest string.
 Remove string: Removes the lowest string in the set.
@@ -49,8 +51,8 @@ Remove string: Removes the lowest string in the set.
 Press Esc to close this window.)HELPTEXT";
 
 void help_cb(Fl_Widget*, void*) {
-    Fl_Window* w = new Fl_Window(700,650, "Help");
-    Fl_Multiline_Output* h = new Fl_Multiline_Output(0,0,700,650);
+    Fl_Window* w = new Fl_Window(700,700, "Help");
+    Fl_Multiline_Output* h = new Fl_Multiline_Output(0,0,700,700);
     h->wrap(FL_INPUT_WRAP);
     h->value(helpText);
 
