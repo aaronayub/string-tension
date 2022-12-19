@@ -1,3 +1,4 @@
+#include <FL/Enumerations.H>
 #include <FL/Fl.H>
 #include <FL/Fl_Choice.H>
 #include <vector>
@@ -12,7 +13,7 @@
 SetSelector::SetSelector(int x, int y, int w, int h, const char* label): Fl_Choice (x,y,w,h,0) {
     this->add("Six String Guitar");
     this->add("Four String Bass");
-    this->when(FL_WHEN_CHANGED);
+    this->when(FL_WHEN_RELEASE_ALWAYS);
     this->label("Presets:");
     this->align(FL_ALIGN_TOP);
 }
@@ -23,13 +24,10 @@ void SetSelector::init(StringView* view) {
     this->callback(applySet_cb,view_);
 
     // Apply the string set and tuning on startup
-    this->setCurrentSet(0);
+    this->value(0);
     this->setCurrentTuning(0);
     applySet_cb(this,view_);
 }
-
-int SetSelector::getCurrentSet() { return currentSet_; }
-void SetSelector::setCurrentSet(int set) { currentSet_ = set; }
 
 int SetSelector::getCurrentTuning() { return currentTuning_; }
 void SetSelector::setCurrentTuning(int tuning) { currentTuning_ = tuning; }
@@ -58,18 +56,13 @@ void SetSelector::tuneSet(std::vector<strlib::String*>& set, int tuning, bool is
 
 void applySet_cb(Fl_Widget* w, void* v) {
     StringView* view = static_cast<StringView*>(v);
-    SetSelector* selector = static_cast<SetSelector*>(w);
-
-    // Change the current set only if the callback was called by SetSelector.
-    if (selector->value() > -1) {
-        selector->setCurrentSet(selector->value());
-    }
+    SetSelector *selector = static_cast<SetSelector *>(w);
 
     // Listing of string sets; should be in the same order as the labels from the constructor.
     std::vector<strlib::String*> set {};
     bool isGuitar = false;
 
-    switch (selector->getCurrentSet()) {
+    switch (selector->value()) {
     // Six String Guitar
     case 0:
         set.push_back(new strlib::String{25.5,10.0,strlib::PL,strlib::notes::E, 4});
@@ -91,7 +84,4 @@ void applySet_cb(Fl_Widget* w, void* v) {
 
     SetSelector::tuneSet(set,selector->getCurrentTuning(),isGuitar);
     view->applySet(set);
-
-    // Reset the set value, so a user can repeatedly select the same set
-    selector->value(-1);
 }

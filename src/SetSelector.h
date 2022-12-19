@@ -17,16 +17,7 @@ class SetSelector : public Fl_Choice {
         /** Associates a StringView with the selector, and sets up a callback for it
          * @param view The StringView that the selector controls
          */
-        void init(StringView* view);
-
-        /** Gets the value of the currentSet
-         @return The numerical value of the last selected set */
-        int getCurrentSet();
-
-        /** Sets the value of the currentSet
-         * @param set The numerical value of the set
-         */
-        void setCurrentSet(int set);
+        void init(StringView *view);
 
         /** Gets the value of the currentTuning
          @return The numerical value of the last selected tuning */
@@ -46,7 +37,6 @@ class SetSelector : public Fl_Choice {
 
     private:
         StringView* view_;
-        int currentSet_; // Choice value of the last selected set. This needs to be stored to allow the callback to be usable externally
         int currentTuning_; // Choice value of the last selected tuning.
 };
 

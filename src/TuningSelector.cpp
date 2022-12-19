@@ -15,6 +15,7 @@ TuningSelector::TuningSelector(int x, int y, int w, int h, const char* label): F
 }
 
 void TuningSelector::init(SetSelector* setSelector) {
+    this->value(0);
     this->callback(tuningSelector_cb,setSelector);
 }
 
