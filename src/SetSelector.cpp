@@ -14,6 +14,7 @@ SetSelector::SetSelector(int x, int y, int w, int h, const char* label): Fl_Choi
     this->add("Six String Guitar");
     this->add("Super Light Guitar");
     this->add("Super Light Top Regular Bottom");
+    this->add("Light Top Heavy Bottom");
     this->add("Four String Bass");
     this->when(FL_WHEN_RELEASE_ALWAYS);
     this->label("Presets:");
@@ -85,6 +86,7 @@ void applySet_cb(Fl_Widget* w, void* v) {
         set.push_back(new strlib::String{25.5,42.0,strlib::NW,strlib::notes::E, 2});
         isGuitar = true;
         break;
+    // Super Light Top Regular Bottom
     case 2:
         set.push_back(new strlib::String{25.5,9.0,strlib::PL,strlib::notes::E, 4});
         set.push_back(new strlib::String{25.5,11.0,strlib::PL,strlib::notes::B, 3});
@@ -94,8 +96,18 @@ void applySet_cb(Fl_Widget* w, void* v) {
         set.push_back(new strlib::String{25.5,46.0,strlib::NW,strlib::notes::E, 2});
         isGuitar = true;
         break;
-    // Four String Bass
+    // Light Top Heavy Bottom
     case 3:
+        set.push_back(new strlib::String{25.5,10.0,strlib::PL,strlib::notes::E, 4});
+        set.push_back(new strlib::String{25.5,13.0,strlib::PL,strlib::notes::B, 3});
+        set.push_back(new strlib::String{25.5,17.0,strlib::PL,strlib::notes::G, 3});
+        set.push_back(new strlib::String{25.5,30.0,strlib::NW,strlib::notes::D, 3});
+        set.push_back(new strlib::String{25.5,42.0,strlib::NW,strlib::notes::A, 2});
+        set.push_back(new strlib::String{25.5,52.0,strlib::NW,strlib::notes::E, 2});
+        isGuitar = true;
+        break;
+    // Four String Bass
+    case 4:
         set.push_back(new strlib::String{34,45.0,strlib::XLB,strlib::notes::G, 2});
         set.push_back(new strlib::String{34,65.0,strlib::XLB,strlib::notes::D, 2});
         set.push_back(new strlib::String{34,85.0,strlib::XLB,strlib::notes::A, 1});
