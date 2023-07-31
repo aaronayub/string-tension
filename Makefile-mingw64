@@ -1,6 +1,6 @@
-CXX:= g++
+CXX:= x86_64-w64-mingw32-g++
 TESTFLAGS:= -lgtest -lgtest_main # Flags used to compile the tests
-LDFLAGS:= ${shell fltk-config --ldflags}
+LDFLAGS:= -static ${shell fltk-config --ldstaticflags}
 
 # Pattern match source files to object files
 GUISRC:= ${wildcard ./src/*.cpp}
