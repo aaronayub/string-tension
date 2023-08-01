@@ -3,7 +3,7 @@ This app lets you calculate the tension of strings on a guitar or bass, and is f
 
 ![Screenshot of the program](docs/img/screen.webp)
 
-###Running the program
+### Running the program
 Run `./string-tension` to execute the program. You can modify any of the string parameters (length, gauge, type, note, and octave) to re-calculate tension. You can reset any modifications made, or switch to a bass preset by using the "Presets" choice widget.
 
 You can also read more detailed usage of the program by pressing `Ctrl + H`, or viewing "Help" in the menu bar at the top of the window.
