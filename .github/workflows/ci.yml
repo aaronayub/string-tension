@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: string-tension CI
 
 on:
   push:
@@ -13,5 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install FLTK headers
+      run: sudo apt-get install -y libfltk1.3-dev
     - name: make
       run: make
