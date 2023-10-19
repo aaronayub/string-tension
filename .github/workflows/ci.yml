@@ -8,12 +8,15 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install FLTK headers
-      run: sudo apt-get install -y libfltk1.3-dev
+    - name: Install build dependencies
+      run: sudo apt-get install -y libfltk1.3-dev libgtest-dev
+    - name: Run library tests
+      run: |
+        make test
+        ./build/test
     - name: make
       run: make
