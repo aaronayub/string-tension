@@ -26,7 +26,7 @@ jobs:
           await github.rest.repos.uploadReleaseAsset({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            release_id: ${process.env.RELEASE_ID},
+            release_id: process.env.RELEASE_ID,
             name: "string-tension.zip",
             data: fs.readFileSync("string-tension.zip")
           });
