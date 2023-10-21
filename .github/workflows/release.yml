@@ -1,0 +1,32 @@
+name: build release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install build dependencies
+      run: sudo apt-get install -y libfltk1.3-dev zip
+    - name: make
+      run: make
+    - name: package
+      run: zip string-tension.zip README.md LICENSE build/string-tension
+    - uses: actions/github-script@6
+      env: 
+        RELEASE_ID: ${{github.event.release.id}}
+      with:
+        script: |
+          const fs = require('fs');
+          await github.rest.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: $(process.env.RELEASE_ID),
+            name: "string-tension.zip",
+            data: fs.readFileSync("string-tension.zip")
+          });
