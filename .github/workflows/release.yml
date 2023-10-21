@@ -17,7 +17,7 @@ jobs:
       run: make
     - name: package
       run: zip string-tension.zip README.md LICENSE build/string-tension
-    - uses: actions/github-script@6
+    - uses: actions/github-script@v6
       env: 
         RELEASE_ID: ${{github.event.release.id}}
       with:
