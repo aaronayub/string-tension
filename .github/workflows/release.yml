@@ -20,6 +20,7 @@ jobs:
     - uses: actions/github-script@v6
       env: 
         RELEASE_ID: ${{github.event.release.id}}
+        RELEASE_NAME: ${{github.event.release.name}}
       with:
         script: |
           const fs = require('fs');
@@ -27,6 +28,6 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             release_id: process.env.RELEASE_ID,
-            name: "string-tension.zip",
+            name: "string-tension_" + process.env.RELEASE_NAME + "_linux64bit.zip",
             data: fs.readFileSync("string-tension.zip")
           });
