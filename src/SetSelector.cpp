@@ -15,7 +15,10 @@ SetSelector::SetSelector(int x, int y, int w, int h, const char* label): Fl_Choi
     this->add("Super Light Guitar");
     this->add("Super Light Top Regular Bottom");
     this->add("Light Top Heavy Bottom");
+    this->add("Medium Guitar");
+    this->add("Heavy Guitar");
     this->add("Four String Bass");
+    this->add("Five String Bass");
     this->when(FL_WHEN_RELEASE_ALWAYS);
     this->label("Presets:");
     this->align(FL_ALIGN_TOP);
@@ -106,12 +109,40 @@ void applySet_cb(Fl_Widget* w, void* v) {
         set.push_back(new strlib::String{25.5,52.0,strlib::NW,strlib::notes::E, 2});
         isGuitar = true;
         break;
-    // Four String Bass
+    // Medium Guitar
     case 4:
+        set.push_back(new strlib::String{25.5,11.0,strlib::PL,strlib::notes::E, 4});
+        set.push_back(new strlib::String{25.5,14.0,strlib::PL,strlib::notes::B, 3});
+        set.push_back(new strlib::String{25.5,18.0,strlib::PL,strlib::notes::G, 3});
+        set.push_back(new strlib::String{25.5,28.0,strlib::NW,strlib::notes::D, 3});
+        set.push_back(new strlib::String{25.5,38.0,strlib::NW,strlib::notes::A, 2});
+        set.push_back(new strlib::String{25.5,48.0,strlib::NW,strlib::notes::E, 2});
+        isGuitar = true;
+        break;
+    // Heavy Guitar
+    case 5:
+        set.push_back(new strlib::String{25.5,12.0,strlib::PL,strlib::notes::E, 4});
+        set.push_back(new strlib::String{25.5,16.0,strlib::PL,strlib::notes::B, 3});
+        set.push_back(new strlib::String{25.5,20.0,strlib::PL,strlib::notes::G, 3});
+        set.push_back(new strlib::String{25.5,32.0,strlib::NW,strlib::notes::D, 3});
+        set.push_back(new strlib::String{25.5,42.0,strlib::NW,strlib::notes::A, 2});
+        set.push_back(new strlib::String{25.5,54.0,strlib::NW,strlib::notes::E, 2});
+        isGuitar = true;
+        break;
+    // Four String Bass
+    case 6:
         set.push_back(new strlib::String{34,45.0,strlib::XLB,strlib::notes::G, 2});
         set.push_back(new strlib::String{34,65.0,strlib::XLB,strlib::notes::D, 2});
-        set.push_back(new strlib::String{34,85.0,strlib::XLB,strlib::notes::A, 1});
-        set.push_back(new strlib::String{34,105.0,strlib::XLB,strlib::notes::E, 1});
+        set.push_back(new strlib::String{34,80.0,strlib::XLB,strlib::notes::A, 1});
+        set.push_back(new strlib::String{34,100.0,strlib::XLB,strlib::notes::E, 1});
+        break;
+    // Five String Bass
+    case 7:
+        set.push_back(new strlib::String{34,45.0,strlib::XLB,strlib::notes::G, 2});
+        set.push_back(new strlib::String{34,65.0,strlib::XLB,strlib::notes::D, 2});
+        set.push_back(new strlib::String{34,80.0,strlib::XLB,strlib::notes::A, 1});
+        set.push_back(new strlib::String{34,100.0,strlib::XLB,strlib::notes::E, 1});
+        set.push_back(new strlib::String{34,130.0,strlib::XLB,strlib::notes::B, 0});
         break;
     }
 
