@@ -12,12 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install build dependencies
-      run: sudo apt-get install -y libfltk1.3-dev zip
+      run: sudo apt-get install -y libfltk1.3-dev
     - name: make
       run: make
     - name: package
-      run: zip string-tension.zip README.md LICENSE build/string-tension
-    - uses: actions/github-script@v6
+      run: |
+        mv build/string-tension string-tension
+        tar -czf string-tension.tar.gz README.md LICENSE string-tension
+    - uses: actions/github-script@v7
       env: 
         RELEASE_ID: ${{github.event.release.id}}
       with:
@@ -27,6 +29,6 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             release_id: process.env.RELEASE_ID,
-            name: "string-tension_" + process.env.GITHUB_REF_NAME + "_linux64bit.zip",
-            data: fs.readFileSync("string-tension.zip")
+            name: "string-tension_" + process.env.GITHUB_REF_NAME + "_linux64bit.tar.gz",
+            data: fs.readFileSync("string-tension.tar.gz")
           });
