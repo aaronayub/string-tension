@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install build dependencies
-      run: sudo apt-get install -y libfltk1.3-dev libgtest-dev
+      run: sudo apt-get install -y libfltk1.3-dev libgtest-dev libxinerama-dev libxcursor-dev libxfixes-dev libxft-dev
     - name: Run library tests
       run: |
         make test
